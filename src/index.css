@@ -1,0 +1,23 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.note-size-0 {
+    height: 7.5rem;
+}
+
+.note-size-1 {
+    height: 8.25rem;
+}
+
+.note-size-2 {
+    height: 9rem;
+}
+
+.note-size-3 {
+    height: 9.75rem;
+}
+
+.notes-gap {
+    gap: 0.75rem;
+}

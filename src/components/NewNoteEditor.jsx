@@ -1,0 +1,67 @@
+import { useRef, useState } from "react";
+import ChevronLeftIcon from "./Common/Icons/ChevronLeftIcon";
+import { motion } from 'framer-motion'
+import useAppStore from "../../store/app-store";
+
+function NewNoteEditor() {
+
+    const { setNewNoteEditorVis, createNewNote } = useAppStore()
+
+    const noteEditorRef = useRef(null)
+    const titleRef = useRef(null)
+
+    function saveNewNote() {
+        console.log(noteEditorRef.current.textContent);
+        if (noteEditorRef?.current?.textContent.length > 0) {
+            createNewNote({
+                title: titleRef.current.value,
+                note: noteEditorRef.current.textContent
+            })
+        }
+        setNewNoteEditorVis(false)
+    }
+
+    const [placeholderVis, setPlaceholderVis] = useState(true)
+
+    function onInput(e) {
+        if (e.target && e.target.textContent.length > 0) {
+            setPlaceholderVis(false)
+        } else {
+            setPlaceholderVis(true)
+        }
+    }
+
+    function handleCloseNewNoteEditor() {
+        setNewNoteEditorVis(false)
+    }
+
+    return (
+        <motion.div
+            initial={{ top: '100%' }}
+            animate={{ top: '0' }}
+            exit={{ top: '100%' }}
+            transition={{ duration: '0.2', bounce: 'none' }}
+            className="absolute inset-0 h-screen bg-gray-900 p-5 overflow-y-scroll z-30">
+
+            <div className="sticky top-0 flex justify-between item-center bg-gray-900">
+                <button onClick={handleCloseNewNoteEditor} className="text-white scale-125 px-1">
+                    <ChevronLeftIcon />
+                </button>
+                <button onClick={saveNewNote} className="text-white px-3 py-2 text-sm  bg-gray-700 rounded-3xl">
+                    Save
+                </button>
+            </div>
+
+            <div className="flex flex-col gap-y-2 mt-4">
+                <input ref={titleRef} className="bg-transparent text-3xl outline-none text-white font-bold placeholder:font-normal placeholder:text-gray-500" placeholder="Title" />
+                <div className="relative">
+                    {placeholderVis && (<span className="absolute top-0 left-0 py-2 text-xl text-gray-700">Note...</span>)}
+                    <div ref={noteEditorRef} onInput={onInput} contentEditable="true" className="relative pb-32 bg-transparent text-xl break-words text-gray-300 outline-none py-2">
+                    </div>
+                </div>
+            </div>
+        </motion.div>
+    );
+}
+
+export default NewNoteEditor;
