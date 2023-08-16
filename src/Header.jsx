@@ -2,7 +2,6 @@ import { useState } from "react";
 import BarsIcon from "./components/Common/Icons/BarsIcon";
 import XIcon from "./components/Common/Icons/XIcon";
 import RectangleGroupIcon from "./components/Common/Icons/RectangleGroupIcon";
-import SearchIcon from "./components/Common/Icons/SearchIcon";
 import QueueListIcon from "./components/Common/Icons/QueueListIcon";
 import useAppStore from "../store/app-store";
 
@@ -24,15 +23,19 @@ function Header() {
         <div className="flex flex-col gap-y-5 p-3">
 
             <div className="relative overflow-hidden flex h-14 justify-between rounded-full p-2 bg-gray-900 shadow-md shadow-gray-900">
-                <button className="bg-gray-900 absolute left-2 z-20 top-2 flex justify-center items-center bottom-2 aspect-square text-white scale-110 transition-all duration-300 hover:bg-gray-800 rounded-full p-1">
-                    <BarsIcon />
-                </button>
+                <div className="absolute left-0 top-0 bottom-0 z-20 flex justify-center items-center p-3">
+
+                    <button className="bg-gray-900 p-1 flex justify-center items-center bottom-2 aspect-square text-white scale-110 transition-all duration-300 hover:bg-gray-800 rounded-full">
+                        <BarsIcon />
+                    </button>
+                </div>
                 {searchStr.length > 0 && (
                     <button onClick={clearSearchInp} className="bg-gray-900 absolute right-2 z-20 top-2 flex justify-center items-center bottom-2 aspect-square text-white scale-110 transition-all duration-300 hover:bg-gray-800 rounded-full p-1">
                         <XIcon />
                     </button>
                 )}
-                <input type="text" value={searchStr} onChange={e => setSearchStr(e.target.value)} className="absolute inset-0 z-0 text-center bg-transparent px-14 text-white" placeholder="Search your notes" />
+                <input type="text" value={searchStr} onChange={e => setSearchStr(e.target.value)}
+                    className="absolute inset-0 outline-none z-0 text-center bg-gray-900 text-xl placeholder:text-lg rounded-full h-full w-full px-14 text-white" placeholder="Search your notes" />
             </div>
 
             <div className="flex justify-between item-center">
