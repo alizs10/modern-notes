@@ -3,7 +3,7 @@ import Note from "./Note";
 
 function EmptyNotes() {
     return (
-        <div className="relative p-5 flex flex-col gap-y-4">
+        <div className="relative p-3 flex flex-col gap-y-4">
 
 
             <div className="mt-4 font-bold text-xl text-gray-900 shadow-md shadow-gray-900 w-full p-5 bg-emerald-300 rounded-3xl">
@@ -16,9 +16,10 @@ function EmptyNotes() {
 
 function Notes() {
 
-    const { notes } = useAppStore()
+    const { notes, listMode } = useAppStore()
 
     let unPinnedNotes = notes.filter(note => (!note.isPinned && !note.deletedAt))
+
 
     if (notes.length === 0) {
         return <EmptyNotes />
@@ -80,26 +81,15 @@ function Notes() {
     }
 
     return (
-        <div className="relative p-5 flex flex-col gap-y-4">
+        <div className="relative p-3 flex flex-col gap-y-4">
 
             <h2 className="text-md text-gray-500">Others</h2>
 
-            <div className="grid grid-cols-2 gap-x-3">
+            <div className={`grid grid-cols-${listMode === 0 ? '2' : '1'} gap-3`}>
 
                 {unPinnedNotes.map((note) => {
                     return <Note key={note._id} note={note} />
                 })}
-                {/* <div className="col-span-1 flex flex-col notes-gap">
-                    {notesWithDir(unPinnedNotes).map((note) => {
-                        return note.dir === 0 ? <Note key={note._id} note={note} /> : null
-                    })}
-
-                </div>
-                <div className="col-span-1 flex flex-col notes-gap">
-                    {notesWithDir(unPinnedNotes).map((note) => {
-                        return note.dir === 1 ? <Note key={note._id} note={note} /> : null
-                    })}
-                </div> */}
 
             </div>
 

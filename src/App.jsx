@@ -17,7 +17,7 @@ function App() {
   }
 
   return (
-    <div className="h-screen overflow-scroll bg-gray-900/90">
+    <div className="h-screen overflow-scroll bg-gray-800">
       <Header />
       <PinnedNotes />
       <Notes />

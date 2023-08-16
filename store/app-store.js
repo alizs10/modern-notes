@@ -91,6 +91,9 @@ const useAppStore = create((set) => ({
     deleteNotePopupVis: false,
     setDeleteNotePopupVis: (payload) => set(() => ({ deleteNotePopupVis: payload })),
 
+    listMode: 0,
+    setListMode: (payload) => set(() => ({ listMode: payload })),
+
     noteInBlurMode: null,
     setNoteInBlurMode: (payload) => set(() => ({ noteInBlurMode: payload })),
 

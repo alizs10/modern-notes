@@ -93,7 +93,7 @@ function Note({ note }) {
             animate={{ x: [-150, 0], opacity: 1 }}
             exit={{ x: [0, -150], opacity: 0 }}
             transition={{ duration: '0.5' }}
-            className={`bg-emerald-300 outline outline-2 outline-emerald-400 shadow-sm shadow-gray-900 relative overflow-hidden p-4 flex flex-col gap-y-2 rounded-3xl`}
+            className={`bg-emerald-300 outline outline-2 outline-emerald-400 col-span-1 shadow-sm shadow-gray-900 relative overflow-hidden p-4 flex flex-col gap-y-2 rounded-3xl`}
             {...handlers}
         >
             <h4 className="text-lg font-bold text-gray-800">{note.title}</h4>

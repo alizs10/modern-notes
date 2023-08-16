@@ -8,8 +8,6 @@ function PinnedNotes() {
 
     let pinnedNotes = notes.filter(note => note.isPinned)
 
-    console.log(pinnedNotes);
-
     if (pinnedNotes.length === 0) return
 
     return (
