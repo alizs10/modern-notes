@@ -6,7 +6,7 @@ function EmptyNotes() {
         <div className="relative p-3 flex flex-col gap-y-4">
 
 
-            <div className="mt-4 font-bold text-xl text-gray-900 shadow-md shadow-gray-900 w-full p-5 bg-emerald-300 rounded-3xl">
+            <div className="mt-4 font-bold text-5xl leading-[1.5] text-gray-500 w-full mx-auto text-center py-10">
                 Take Your First Note :)
             </div>
 
