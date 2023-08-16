@@ -9,10 +9,11 @@ import BgBlur from "./components/Common/BgBlur"
 import DeleteConfirmationPopup from "./components/popups/DeleteConfirmationPopup"
 import Menu from "./components/Menu"
 import TrashedNotes from "./components/TrashedNotes"
+import About from "./components/About"
 
 function App() {
 
-  const { newNoteEditorVis, setNewNoteEditorVis, deleteNotePopupVis, menuVis } = useAppStore()
+  const { newNoteEditorVis, setNewNoteEditorVis, deleteNotePopupVis, menuVis, showAbout } = useAppStore()
 
   function handleOpenNewNoteEditor() {
     setNewNoteEditorVis(true)
@@ -29,6 +30,12 @@ function App() {
       <AnimatePresence>
         {menuVis && (
           <Menu />
+        )}
+      </AnimatePresence>
+
+      <AnimatePresence>
+        {showAbout && (
+          <About />
         )}
       </AnimatePresence>
 

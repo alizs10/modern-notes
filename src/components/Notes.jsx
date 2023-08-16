@@ -18,7 +18,7 @@ function Notes() {
 
     const { notes, showSearchRes, searchRes, listMode, showTrash } = useAppStore()
 
-    let unPinnedNotes = showSearchRes ? searchRes.filter(note => (!note.isPinned && !note.deletedAt)) : notes.filter(note => (!note.isPinned && !note.deletedAt))
+    let othersNotes = showSearchRes ? searchRes.filter(note => (!note.isPinned && !note.deletedAt)) : notes.filter(note => (!note.isPinned && !note.deletedAt))
 
     console.log(showSearchRes);
 
@@ -88,11 +88,13 @@ function Notes() {
     return (
         <div className="relative p-3 flex flex-col gap-y-4">
 
-            <h2 className="text-md text-gray-400">Others</h2>
+            <h2 className="text-md text-gray-400">Others
+                <span className="text-xs text-gray-400 ml-2">{othersNotes.length}</span>
+            </h2>
 
             <div className={`grid grid-cols-${listMode === 0 ? '2' : '1'} gap-3`}>
 
-                {unPinnedNotes.map((note) => {
+                {othersNotes.map((note) => {
                     return <Note key={note._id} note={note} />
                 })}
 

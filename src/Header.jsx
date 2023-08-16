@@ -74,7 +74,7 @@ function Header() {
 
             <div className="flex justify-between item-center">
                 <h2 className="text-2xl text-white font-bold">My Notes
-                    <span className="text-xs text-gray-400 ml-2">{notes.length}</span>
+                    <span className="text-xs text-gray-400 ml-2">{notes.filter(note => !note.deletedAt).length}</span>
                 </h2>
 
                 {listMode === 0 ? (

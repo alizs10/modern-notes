@@ -8,7 +8,7 @@ import { motion } from 'framer-motion'
 
 function Menu() {
 
-    const { setMenuVis, lightTheme, setLightTheme, showTrash, setShowTrash } = useAppStore()
+    const { setMenuVis, lightTheme, setLightTheme, showTrash, setShowTrash, setShowAbout } = useAppStore()
     function handleClose() {
         setMenuVis(false)
     }
@@ -20,6 +20,11 @@ function Menu() {
     function toggleTrash(mode) {
         setShowTrash(mode)
         handleClose()
+    }
+
+    function handleShowAbout() {
+        handleClose()
+        setShowAbout(true)
     }
 
     return (
@@ -75,6 +80,7 @@ function Menu() {
                     animate={{ x: [-250, 0] }}
                     transition={{ duration: '0.3', bounce: 'none', delay: 0.3 }}
                     exit={{ x: [0, -250], transition: { delay: 0 } }}
+                    onClick={handleShowAbout}
                     className="text-left text-lg w-fit flex items-center gap-x-1 text-gray-300 bg-gray-900 rounded-3xl py-3 px-5">
                     <span className="scale-[85%]">
                         <InfoIcon />

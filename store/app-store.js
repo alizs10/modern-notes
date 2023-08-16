@@ -114,6 +114,9 @@ const useAppStore = create((set) => ({
 
     showTrash: true,
     setShowTrash: (payload) => set(() => ({ showTrash: payload })),
+
+    showAbout: true,
+    setShowAbout: (payload) => set(() => ({ showAbout: payload })),
 }))
 
 
