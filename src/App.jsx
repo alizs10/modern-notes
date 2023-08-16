@@ -5,10 +5,12 @@ import NewNoteEditor from "./components/NewNoteEditor"
 import Notes from "./components/Notes"
 import PinnedNotes from "./components/PinnedNotes"
 import Header from "./Header"
+import BgBlur from "./components/Common/BgBlur"
+import DeleteConfirmationPopup from "./components/popups/DeleteConfirmationPopup"
 
 function App() {
 
-  const { newNoteEditorVis, setNewNoteEditorVis } = useAppStore()
+  const { newNoteEditorVis, setNewNoteEditorVis, deleteNotePopupVis } = useAppStore()
 
   function handleOpenNewNoteEditor() {
     setNewNoteEditorVis(true)
@@ -17,11 +19,14 @@ function App() {
   return (
     <div className="h-screen overflow-scroll bg-gray-900/90">
       <Header />
-
       <PinnedNotes />
-
       <Notes />
-
+      <BgBlur />
+      <AnimatePresence>
+        {deleteNotePopupVis && (
+          <DeleteConfirmationPopup />
+        )}
+      </AnimatePresence>
       <AnimatePresence>
         {newNoteEditorVis && (
           <NewNoteEditor />

@@ -41,19 +41,19 @@ const useAppStore = create((set) => ({
         let notesIns = [...state.notes]
         let filteredNotes = notesIns.filter(n => n._id !== noteId)
 
-        return { notes: filteredNotes }
+        return { notes: filteredNotes, noteInBlurMode: null, deleteNotePopupVis: false }
     }),
 
     trashNote: (payload) => set((state) => {
 
         let { noteId } = payload;
 
-        let deletedAt = new Date.now()
+        let deletedAt = Date.now()
         let notesIns = [...state.notes]
         let updatableNoteIndex = notesIns.findIndex(n => n._id === noteId)
         notesIns[updatableNoteIndex] = { ...notesIns[updatableNoteIndex], deletedAt }
 
-        return { notes: notesIns }
+        return { notes: notesIns, noteInBlurMode: null, deleteNotePopupVis: false }
     }),
 
     unTrashNote: (payload) => set((state) => {
@@ -88,6 +88,8 @@ const useAppStore = create((set) => ({
         return { notes: notesIns }
     }),
 
+    deleteNotePopupVis: false,
+    setDeleteNotePopupVis: (payload) => set(() => ({ deleteNotePopupVis: payload })),
 
     noteInBlurMode: null,
     setNoteInBlurMode: (payload) => set(() => ({ noteInBlurMode: payload })),

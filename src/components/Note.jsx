@@ -9,7 +9,7 @@ import UnPinIcon from "./Common/Icons/UnPinIcon";
 
 function Note({ note }) {
 
-    const { noteInBlurMode, setNoteInBlurMode, pinNote, unPinNote } = useAppStore()
+    const { noteInBlurMode, setNoteInBlurMode, pinNote, unPinNote, setDeleteNotePopupVis } = useAppStore()
 
     const config = {
         delta: 10,                             // min distance(px) before a swipe starts. *See Notes*
@@ -103,7 +103,7 @@ function Note({ note }) {
 
             <div style={{ left: (note._id === noteInBlurMode?._id) ? lBlur : '100%' }} className="absolute transition-all duration-300 w-full top-0 bottom-0 left-full backdrop-blur-[2px] rounded-xl flex items-end pb-4 justify-center gap-x-2">
 
-                <button className="p-2 aspect-square shadow-md rounded-full bg-red-50 text-red-500 text-sm">
+                <button onClick={() => setDeleteNotePopupVis(true)} className="p-2 aspect-square shadow-md rounded-full bg-red-50 text-red-500 text-sm">
                     <div className="scale-90">
                         <TrashIcon />
                     </div>
