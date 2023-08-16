@@ -117,6 +117,8 @@ const useAppStore = create((set) => ({
 
     showAbout: true,
     setShowAbout: (payload) => set(() => ({ showAbout: payload })),
+
+    version: '1.0.0'
 }))
 
 
