@@ -4,7 +4,6 @@ import { create } from "zustand";
 const useAppStore = create((set) => ({
 
     notes: [],
-    pinnedNotes: [],
     setNotes: (payload) => set(() => ({ notes: payload })),
 
     createNewNote: (payload) => set((state) => {
@@ -15,30 +14,80 @@ const useAppStore = create((set) => ({
         newNoteObj.color = 0;
         newNoteObj.title = payload.title;
         newNoteObj.note = payload.note;
+        newNoteObj.isPinned = false;
         newNoteObj.createdAt = d;
         newNoteObj.updatedAt = d;
         newNoteObj.deletedAt = null;
-        newNoteObj.isPinned = false;
-
-        if (newNoteObj.note.length <= 120) {
-            newNoteObj.size = 0;
-        }
-
-        if (newNoteObj.note.length > 120 && newNoteObj.note.length <= 200) {
-            newNoteObj.size = 1;
-        }
-
-        if (newNoteObj.note.length > 200 && newNoteObj.note.length <= 300) {
-            newNoteObj.size = 2;
-        }
-
-        if (newNoteObj.note.length > 300) {
-            newNoteObj.size = 3;
-        }
-
 
         return { notes: [newNoteObj, ...state.notes] }
     }),
+
+    updateNote: (payload) => set((state) => {
+
+        let { noteId, title, note, color, isPinned } = payload;
+
+        let updatedAt = new Date.now()
+        let notesIns = [...state.notes]
+        let updatableNoteIndex = notesIns.findIndex(n => n._id === noteId)
+        notesIns[updatableNoteIndex] = { ...notesIns[updatableNoteIndex], title, note, color, isPinned, updatedAt }
+
+        return { notes: notesIns }
+    }),
+
+    deleteNote: (payload) => set((state) => {
+
+        let { noteId } = payload;
+
+        let notesIns = [...state.notes]
+        let filteredNotes = notesIns.filter(n => n._id !== noteId)
+
+        return { notes: filteredNotes }
+    }),
+
+    trashNote: (payload) => set((state) => {
+
+        let { noteId } = payload;
+
+        let deletedAt = new Date.now()
+        let notesIns = [...state.notes]
+        let updatableNoteIndex = notesIns.findIndex(n => n._id === noteId)
+        notesIns[updatableNoteIndex] = { ...notesIns[updatableNoteIndex], deletedAt }
+
+        return { notes: notesIns }
+    }),
+
+    unTrashNote: (payload) => set((state) => {
+        let { noteId } = payload;
+
+        let notesIns = [...state.notes]
+        let updatableNoteIndex = notesIns.findIndex(n => n._id === noteId)
+        notesIns[updatableNoteIndex] = { ...notesIns[updatableNoteIndex], deletedAt: null }
+
+        return { notes: notesIns }
+    }),
+
+    pinNote: (payload) => set((state) => {
+
+        let { noteId } = payload;
+
+        let notesIns = [...state.notes]
+        let updatableNoteIndex = notesIns.findIndex(n => n._id === noteId)
+        notesIns[updatableNoteIndex] = { ...notesIns[updatableNoteIndex], isPinned: true }
+
+        return { notes: notesIns }
+    }),
+
+    unPinNote: (payload) => set((state) => {
+
+        let { noteId } = payload;
+
+        let notesIns = [...state.notes]
+        let updatableNoteIndex = notesIns.findIndex(n => n._id === noteId)
+        notesIns[updatableNoteIndex] = { ...notesIns[updatableNoteIndex], isPinned: false }
+
+        return { notes: notesIns }
+    }),
+
 
     noteInBlurMode: null,
     setNoteInBlurMode: (payload) => set(() => ({ noteInBlurMode: payload })),

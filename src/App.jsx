@@ -15,10 +15,13 @@ function App() {
   }
 
   return (
-    <div className="h-screen w-screen overflow-scroll bg-gray-900/90">
+    <div className="h-screen overflow-scroll bg-gray-900/90">
       <Header />
+
       <PinnedNotes />
+
       <Notes />
+
       <AnimatePresence>
         {newNoteEditorVis && (
           <NewNoteEditor />

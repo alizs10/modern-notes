@@ -18,6 +18,8 @@ function Notes() {
 
     const { notes } = useAppStore()
 
+    let unPinnedNotes = notes.filter(note => !note.isPinned)
+
     if (notes.length === 0) {
         return <EmptyNotes />
     }
@@ -82,17 +84,17 @@ function Notes() {
     return (
         <div className="relative p-5 flex flex-col gap-y-4">
 
-            <h2 className="text-md text-gray-600">Others</h2>
+            <h2 className="text-md text-gray-500">Others</h2>
 
             <div className="grid grid-cols-2 gap-x-3">
                 <div className="col-span-1 flex flex-col notes-gap">
-                    {notesWithDir(notes).map((note) => {
+                    {notesWithDir(unPinnedNotes).map((note) => {
                         return note.dir === 0 ? <Note key={note._id} note={note} /> : null
                     })}
 
                 </div>
                 <div className="col-span-1 flex flex-col notes-gap">
-                    {notesWithDir(notes).map((note) => {
+                    {notesWithDir(unPinnedNotes).map((note) => {
                         return note.dir === 1 ? <Note key={note._id} note={note} /> : null
                     })}
                 </div>
