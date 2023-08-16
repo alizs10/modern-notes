@@ -4,11 +4,11 @@ import useAppStore from "../../../store/app-store";
 
 function BgBlur() {
 
-    const { deleteNotePopupVis } = useAppStore()
+    const { deleteNotePopupVis, menuVis } = useAppStore()
 
     return (
         <AnimatePresence>
-            {(deleteNotePopupVis) && (
+            {(deleteNotePopupVis || menuVis) && (
                 <motion.div
                     initial={{ backdropFilter: 'blur(0px)' }}
                     animate={{ backdropFilter: 'blur(8px)' }}

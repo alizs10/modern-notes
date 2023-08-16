@@ -7,10 +7,11 @@ import PinnedNotes from "./components/PinnedNotes"
 import Header from "./Header"
 import BgBlur from "./components/Common/BgBlur"
 import DeleteConfirmationPopup from "./components/popups/DeleteConfirmationPopup"
+import Menu from "./components/Menu"
 
 function App() {
 
-  const { newNoteEditorVis, setNewNoteEditorVis, deleteNotePopupVis } = useAppStore()
+  const { newNoteEditorVis, setNewNoteEditorVis, deleteNotePopupVis, menuVis } = useAppStore()
 
   function handleOpenNewNoteEditor() {
     setNewNoteEditorVis(true)
@@ -22,11 +23,19 @@ function App() {
       <PinnedNotes />
       <Notes />
       <BgBlur />
+
+      <AnimatePresence>
+        {menuVis && (
+          <Menu />
+        )}
+      </AnimatePresence>
+
       <AnimatePresence>
         {deleteNotePopupVis && (
           <DeleteConfirmationPopup />
         )}
       </AnimatePresence>
+
       <AnimatePresence>
         {newNoteEditorVis && (
           <NewNoteEditor />

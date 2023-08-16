@@ -97,6 +97,9 @@ const useAppStore = create((set) => ({
     deleteNotePopupVis: false,
     setDeleteNotePopupVis: (payload) => set(() => ({ deleteNotePopupVis: payload })),
 
+    menuVis: false,
+    setMenuVis: (payload) => set(() => ({ menuVis: payload })),
+
     listMode: 0,
     setListMode: (payload) => set(() => ({ listMode: payload })),
 
@@ -104,7 +107,13 @@ const useAppStore = create((set) => ({
     setNoteInBlurMode: (payload) => set(() => ({ noteInBlurMode: payload })),
 
     newNoteEditorVis: false,
-    setNewNoteEditorVis: (payload) => set(() => ({ newNoteEditorVis: payload }))
+    setNewNoteEditorVis: (payload) => set(() => ({ newNoteEditorVis: payload })),
+
+    lightTheme: true,
+    setLightTheme: (payload) => set(() => ({ lightTheme: payload })),
+
+    showTrash: true,
+    setShowTrash: (payload) => set(() => ({ showTrash: payload })),
 }))
 
 

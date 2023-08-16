@@ -7,7 +7,7 @@ import useAppStore from "../store/app-store";
 
 function Header() {
 
-    const { listMode, setListMode, notes, setSearchRes, showSearchRes, setShowSearchRes } = useAppStore()
+    const { listMode, setListMode, notes, setSearchRes, showSearchRes, setShowSearchRes, setMenuVis } = useAppStore()
 
     function toggleBetweenModes() {
         setListMode(listMode === 0 ? 1 : 0)
@@ -57,7 +57,9 @@ function Header() {
             <div className="relative overflow-hidden flex h-14 justify-between rounded-full p-2 bg-gray-900 shadow-md shadow-gray-900">
                 <div className="absolute left-0 top-0 bottom-0 z-20 flex justify-center items-center p-3">
 
-                    <button className="bg-gray-900 p-1 flex justify-center items-center bottom-2 aspect-square text-white scale-110 transition-all duration-300 hover:bg-gray-800 rounded-full">
+                    <button
+                        onClick={() => setMenuVis(true)}
+                        className="bg-gray-900 p-1 flex justify-center items-center bottom-2 aspect-square text-white scale-110 transition-all duration-300 hover:bg-gray-800 rounded-full">
                         <BarsIcon />
                     </button>
                 </div>
