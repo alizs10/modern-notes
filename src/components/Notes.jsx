@@ -83,7 +83,7 @@ function Notes() {
     return (
         <div className="relative p-3 flex flex-col gap-y-4">
 
-            <h2 className="text-md text-gray-500">Others</h2>
+            <h2 className="text-md text-gray-400">Others</h2>
 
             <div className={`grid grid-cols-${listMode === 0 ? '2' : '1'} gap-3`}>
 

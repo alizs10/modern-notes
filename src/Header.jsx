@@ -7,7 +7,7 @@ import useAppStore from "../store/app-store";
 
 function Header() {
 
-    const { listMode, setListMode } = useAppStore()
+    const { listMode, setListMode, notes } = useAppStore()
 
     function toggleBetweenModes() {
         setListMode(listMode === 0 ? 1 : 0)
@@ -39,7 +39,9 @@ function Header() {
             </div>
 
             <div className="flex justify-between item-center">
-                <h2 className="text-2xl text-white font-bold">My Notes</h2>
+                <h2 className="text-2xl text-white font-bold">My Notes
+                    <span className="text-xs text-gray-400 ml-2">{notes.length + 125}</span>
+                </h2>
 
                 {listMode === 0 ? (
                     <button onClick={toggleBetweenModes} className="text-white scale-110 transition-all duration-300 hover:bg-gray-700 rounded-full p-[0.4rem]">

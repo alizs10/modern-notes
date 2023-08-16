@@ -4,18 +4,18 @@ import Note from "./Note";
 
 function PinnedNotes() {
 
-    const { notes } = useAppStore()
+    const { notes, listMode } = useAppStore()
 
-    let pinnedNotes = notes.filter(note => note.isPinned)
+    let pinnedNotes = notes.filter(note => (note.isPinned && !note.deletedAt))
 
     if (pinnedNotes.length === 0) return
 
     return (
-        <div className="relative px-5 flex flex-col gap-y-4">
+        <div className="relative px-3 flex flex-col gap-y-4">
 
-            <h2 className="text-md text-gray-500">Pinned</h2>
+            <h2 className="text-md text-gray-400">Pinned</h2>
 
-            <div className="grid grid-cols-2 gap-3">
+            <div className={`grid grid-cols-${listMode === 0 ? '2' : '1'} gap-3`}>
                 {pinnedNotes.map(note => <Note key={note._id} note={note} />)}
             </div>
         </div>
