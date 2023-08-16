@@ -35,7 +35,7 @@ function About() {
                 </h1>
 
                 <p className="text-gray-300 text-3xl leading-[1.3]">
-                    A Modern, Nice Looking and Useful Note App that <span className="text-yellow-300">ACTUALLY</span> WORKS!
+                    A Modern, Nice Looking and Useful Note App that <span className="text-yellow-200">ACTUALLY</span> WORKS!
                 </p>
 
                 <p className="mt-4 text-gray-300 whitespace-pre-wrap text-lg">
