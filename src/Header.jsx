@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import BarsIcon from "./components/Common/Icons/BarsIcon";
 import XIcon from "./components/Common/Icons/XIcon";
 import RectangleGroupIcon from "./components/Common/Icons/RectangleGroupIcon";
@@ -7,7 +7,7 @@ import useAppStore from "../store/app-store";
 
 function Header() {
 
-    const { listMode, setListMode, notes } = useAppStore()
+    const { listMode, setListMode, notes, setSearchRes, showSearchRes, setShowSearchRes } = useAppStore()
 
     function toggleBetweenModes() {
         setListMode(listMode === 0 ? 1 : 0)
@@ -18,6 +18,38 @@ function Header() {
     function clearSearchInp() {
         setSearchStr('')
     }
+
+    function handleSearch() {
+
+        // Search Start
+
+
+        let notesIns = [...notes]
+        let searchRes = notesIns.filter(note => {
+            if (note.title.toLowerCase().includes(searchStr.toLowerCase()) || note.note.toLowerCase().includes(searchStr.toLowerCase())) {
+                return true
+            }
+
+            return false
+        })
+
+        setSearchRes(searchRes)
+
+        if (!showSearchRes) {
+            setShowSearchRes(true)
+        }
+    }
+
+    useEffect(() => {
+
+        if (searchStr.length === 0) {
+            setShowSearchRes(false)
+            return
+        }
+
+        handleSearch()
+
+    }, [searchStr])
 
     return (
         <div className="flex flex-col gap-y-5 p-3">
@@ -40,7 +72,7 @@ function Header() {
 
             <div className="flex justify-between item-center">
                 <h2 className="text-2xl text-white font-bold">My Notes
-                    <span className="text-xs text-gray-400 ml-2">{notes.length + 125}</span>
+                    <span className="text-xs text-gray-400 ml-2">{notes.length}</span>
                 </h2>
 
                 {listMode === 0 ? (

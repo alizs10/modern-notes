@@ -6,12 +6,18 @@ const useAppStore = create((set) => ({
     notes: [],
     setNotes: (payload) => set(() => ({ notes: payload })),
 
+    searchRes: [],
+    setSearchRes: (payload) => set(() => ({ searchRes: payload })),
+
+    showSearchRes: false,
+    setShowSearchRes: (payload) => set(() => ({ showSearchRes: payload })),
+
     createNewNote: (payload) => set((state) => {
 
         let newNoteObj = {};
         let d = Date.now()
         newNoteObj._id = new Date().getTime();
-        newNoteObj.color = 0;
+        newNoteObj.color = payload.color;
         newNoteObj.title = payload.title;
         newNoteObj.note = payload.note;
         newNoteObj.isPinned = false;

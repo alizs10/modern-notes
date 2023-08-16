@@ -69,20 +69,26 @@ function Note({ note }) {
     function noteColor(color) {
         switch (color) {
             case 0:
-                return 'bg-gray-400 outline outline-2 outline-gray-500'
+                return 'bg-gray-900 outline outline-2 outline-gray-900 text-white'
                 break;
             case 1:
-                return 'bg-gray-400 outline outline-2 outline-gray-500'
+                return 'bg-emerald-400 outline outline-2 outline-emerald-500'
                 break;
             case 2:
-                return 'bg-gray-400 outline outline-2 outline-gray-500'
+                return 'bg-purple-400 outline outline-2 outline-purple-500'
                 break;
             case 3:
+                return 'bg-red-400 outline outline-2 outline-red-500'
+                break;
+            case 4:
                 return 'bg-gray-400 outline outline-2 outline-gray-500'
+                break;
+            case 5:
+                return 'bg-orange-400 outline outline-2 outline-orange-500'
                 break;
 
             default:
-                return 'bg-gray-400 outline outline-2 outline-gray-500'
+                return 'bg-gray-900 outline outline-2 outline-gray-900 text-white'
                 break;
         }
     }
@@ -93,11 +99,11 @@ function Note({ note }) {
             animate={{ x: [-150, 0], opacity: 1 }}
             exit={{ x: [0, -150], opacity: 0 }}
             transition={{ duration: '0.5' }}
-            className={`bg-emerald-300 outline outline-2 outline-emerald-400 col-span-1 shadow-sm shadow-gray-900 relative overflow-hidden p-4 flex flex-col gap-y-2 rounded-3xl`}
+            className={`${noteColor(note.color)} col-span-1 shadow-sm shadow-gray-900 relative overflow-hidden p-4 flex flex-col gap-y-2 rounded-3xl`}
             {...handlers}
         >
-            <h4 className="text-lg font-bold text-gray-800">{note.title}</h4>
-            <p className="text-sm break-words text-ellipsis text-gray-900">
+            <h4 className="text-lg font-bold">{note.title}</h4>
+            <p className="text-sm break-words text-ellipsis">
                 {note.note}
             </p>
 

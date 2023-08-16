@@ -16,14 +16,17 @@ function EmptyNotes() {
 
 function Notes() {
 
-    const { notes, listMode } = useAppStore()
+    const { notes, showSearchRes, searchRes, listMode } = useAppStore()
 
-    let unPinnedNotes = notes.filter(note => (!note.isPinned && !note.deletedAt))
+    let unPinnedNotes = showSearchRes ? searchRes.filter(note => (!note.isPinned && !note.deletedAt)) : notes.filter(note => (!note.isPinned && !note.deletedAt))
 
+    console.log(showSearchRes);
 
     if (notes.length === 0) {
         return <EmptyNotes />
     }
+
+    console.log(showSearchRes);
 
     function notesWithDir(notes) {
 

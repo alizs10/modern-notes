@@ -2,6 +2,7 @@ import { useRef, useState } from "react";
 import ChevronLeftIcon from "./Common/Icons/ChevronLeftIcon";
 import { motion } from 'framer-motion'
 import useAppStore from "../../store/app-store";
+import CheckCircleIcon from "./Common/Icons/CheckCircleIcon";
 
 function NewNoteEditor() {
 
@@ -15,7 +16,8 @@ function NewNoteEditor() {
         if (noteEditorRef?.current?.textContent.length > 0) {
             createNewNote({
                 title: titleRef.current.value,
-                note: noteEditorRef.current.textContent
+                note: noteEditorRef.current.textContent,
+                color
             })
         }
         setNewNoteEditorVis(false)
@@ -35,6 +37,8 @@ function NewNoteEditor() {
         setNewNoteEditorVis(false)
     }
 
+    const [color, setColor] = useState(0)
+
     return (
         <motion.div
             initial={{ top: '100%' }}
@@ -53,6 +57,62 @@ function NewNoteEditor() {
             </div>
 
             <div className="flex flex-col gap-y-2 mt-4">
+                <div className="flex flex-nowrap gap-3">
+                    <div
+                        onClick={() => setColor(0)}
+                        className="aspect-video h-6 bg-gray-900 outline outline-[.2rem] flex justify-center items-center outline-gray-900 rounded-full">
+                        {color === 0 && (
+                            <span className="text-white scale-75">
+                                <CheckCircleIcon />
+                            </span>
+                        )}
+                    </div>
+                    <div
+                        onClick={() => setColor(1)}
+                        className="aspect-video h-6 bg-emerald-300 outline outline-[.2rem] flex justify-center items-center outline-emerald-500 rounded-full">
+                        {color === 1 && (
+                            <span className="text-white scale-75">
+                                <CheckCircleIcon />
+                            </span>
+                        )}
+                    </div>
+                    <div
+                        onClick={() => setColor(2)}
+                        className="aspect-video h-6 bg-purple-300 outline outline-[.2rem] flex justify-center items-center outline-purple-500 rounded-full">
+                        {color === 2 && (
+                            <span className="text-white scale-75">
+                                <CheckCircleIcon />
+                            </span>
+                        )}
+                    </div>
+                    <div
+                        onClick={() => setColor(3)}
+                        className="aspect-video h-6 bg-red-300 outline outline-[.2rem] flex justify-center items-center outline-red-500 rounded-full">
+                        {color === 3 && (
+                            <span className="text-white scale-75">
+                                <CheckCircleIcon />
+                            </span>
+                        )}
+                    </div>
+                    <div
+                        onClick={() => setColor(4)}
+                        className="aspect-video h-6 bg-gray-400 outline outline-[.2rem] flex justify-center items-center outline-gray-500 rounded-full">
+                        {color === 4 && (
+                            <span className="text-white scale-75">
+                                <CheckCircleIcon />
+                            </span>
+                        )}
+                    </div>
+                    <div
+                        onClick={() => setColor(5)}
+                        className="aspect-video h-6 bg-orange-300 outline outline-[.2rem] flex justify-center items-center outline-orange-500 rounded-full">
+                        {color === 5 && (
+                            <span className="text-white scale-75">
+                                <CheckCircleIcon />
+                            </span>
+                        )}
+                    </div>
+                </div>
                 <input ref={titleRef} className="bg-transparent text-3xl outline-none text-white font-bold placeholder:font-normal placeholder:text-gray-500" placeholder="Title" />
                 <div className="relative">
                     {placeholderVis && (<span className="absolute top-0 left-0 py-2 text-xl text-gray-700">Note...</span>)}

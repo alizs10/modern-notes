@@ -4,9 +4,9 @@ import Note from "./Note";
 
 function PinnedNotes() {
 
-    const { notes, listMode } = useAppStore()
+    const { notes, showSearchRes, searchRes, listMode } = useAppStore()
 
-    let pinnedNotes = notes.filter(note => (note.isPinned && !note.deletedAt))
+    let pinnedNotes = showSearchRes ? searchRes.filter(note => (note.isPinned && !note.deletedAt)) : notes.filter(note => (note.isPinned && !note.deletedAt))
 
     if (pinnedNotes.length === 0) return
 
