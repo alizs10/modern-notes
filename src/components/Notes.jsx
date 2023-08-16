@@ -16,7 +16,7 @@ function EmptyNotes() {
 
 function Notes() {
 
-    const { notes, showSearchRes, searchRes, listMode } = useAppStore()
+    const { notes, showSearchRes, searchRes, listMode, showTrash } = useAppStore()
 
     let unPinnedNotes = showSearchRes ? searchRes.filter(note => (!note.isPinned && !note.deletedAt)) : notes.filter(note => (!note.isPinned && !note.deletedAt))
 
@@ -82,6 +82,8 @@ function Notes() {
 
         return newNotesArr;
     }
+
+    if (showTrash) return
 
     return (
         <div className="relative p-3 flex flex-col gap-y-4">

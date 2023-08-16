@@ -7,7 +7,7 @@ import useAppStore from "../store/app-store";
 
 function Header() {
 
-    const { listMode, setListMode, notes, setSearchRes, showSearchRes, setShowSearchRes, setMenuVis } = useAppStore()
+    const { listMode, setListMode, notes, setSearchRes, showSearchRes, setShowSearchRes, setMenuVis, showTrash } = useAppStore()
 
     function toggleBetweenModes() {
         setListMode(listMode === 0 ? 1 : 0)
@@ -26,7 +26,7 @@ function Header() {
 
         let notesIns = [...notes]
         let searchRes = notesIns.filter(note => {
-            if (note.title.toLowerCase().includes(searchStr.toLowerCase()) || note.note.toLowerCase().includes(searchStr.toLowerCase())) {
+            if (showTrash === !!note.deletedAt && (note.title.toLowerCase().includes(searchStr.toLowerCase()) || note.note.toLowerCase().includes(searchStr.toLowerCase()))) {
                 return true
             }
 
@@ -49,7 +49,7 @@ function Header() {
 
         handleSearch()
 
-    }, [searchStr])
+    }, [searchStr, showTrash])
 
     return (
         <div className="flex flex-col gap-y-5 p-3">

@@ -19,6 +19,7 @@ function Menu() {
 
     function toggleTrash(mode) {
         setShowTrash(mode)
+        handleClose()
     }
 
     return (

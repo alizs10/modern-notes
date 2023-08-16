@@ -8,6 +8,7 @@ import Header from "./Header"
 import BgBlur from "./components/Common/BgBlur"
 import DeleteConfirmationPopup from "./components/popups/DeleteConfirmationPopup"
 import Menu from "./components/Menu"
+import TrashedNotes from "./components/TrashedNotes"
 
 function App() {
 
@@ -20,6 +21,7 @@ function App() {
   return (
     <div className="h-screen overflow-scroll bg-gray-800">
       <Header />
+      <TrashedNotes />
       <PinnedNotes />
       <Notes />
       <BgBlur />

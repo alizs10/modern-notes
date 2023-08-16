@@ -4,11 +4,11 @@ import Note from "./Note";
 
 function PinnedNotes() {
 
-    const { notes, showSearchRes, searchRes, listMode } = useAppStore()
+    const { notes, showSearchRes, searchRes, listMode, showTrash } = useAppStore()
 
     let pinnedNotes = showSearchRes ? searchRes.filter(note => (note.isPinned && !note.deletedAt)) : notes.filter(note => (note.isPinned && !note.deletedAt))
 
-    if (pinnedNotes.length === 0) return
+    if (pinnedNotes.length === 0 || showTrash) return
 
     return (
         <div className="relative px-3 flex flex-col gap-y-4">
