@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import ChevronLeftIcon from "./Common/Icons/ChevronLeftIcon";
 import { motion } from 'framer-motion'
 import useAppStore from "../../store/app-store";
@@ -38,6 +38,10 @@ function NewNoteEditor() {
     }
 
     const [color, setColor] = useState(0)
+
+    useEffect(() => {
+        noteEditorRef?.current.focus()
+    }, [])
 
     return (
         <motion.div
