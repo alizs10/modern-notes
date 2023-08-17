@@ -1,5 +1,8 @@
 import useAppStore from "../../../store/app-store";
 import BackdropWrapper from "../Common/BackdropWrapper";
+import { motion } from 'framer-motion'
+import { useSwipeable } from "react-swipeable";
+import { config } from "../../../libs/swipeable";
 
 function DeleteConfirmationPopup() {
 
@@ -9,23 +12,37 @@ function DeleteConfirmationPopup() {
         setDeleteNotePopupVis(false)
     }
 
+    const handlers = useSwipeable({
+        onSwipedDown: closePopup,
+        ...config
+    })
+
     return (
         <BackdropWrapper handleClick={closePopup} >
-            <div onClick={e => e.stopPropagation()} className="max-w-[70%] rounded-3xl bg-gray-900 h-fit self-center mx-auto p-5 flex flex-col gap-y-10 justify-center">
-                <h2 className="font-bold text-center text-3xl text-white break-words">Choose Action To Proceed</h2>
+            <motion.div
+                initial={{ y: '100%' }}
+                animate={{ y: ['100%', '30%'] }}
+                exit={{ y: '100%' }}
+                transition={{ bounce: 'none', duration: '0.3' }}
+                {...handlers}
+                onClick={e => e.stopPropagation()}
+                className="fixed inset-0 bg-gray-900 p-10 rounded-t-[50px] flex flex-col gap-y-10 justify-center">
+                <div className="w-24 h-1 bg-gray-500 rounded-full absolute top-2 left-1/2 -translate-x-1/2"></div>
 
-                <div className="flex flex-col gap-y-2">
-                    <button onClick={() => trashNote({ noteId: noteInBlurMode._id })} className="w-full text-center whitespace-nowrap rounded-xl py-2 text-md  bg-red-100 text-gray-900">
+                <h2 className="font-bold text-4xl text-white break-words uppercase leading-[1.4]">Choose an Action To Proceed</h2>
+
+                <div className="mb-auto flex flex-col gap-y-2">
+                    <button onClick={() => trashNote({ noteId: noteInBlurMode._id })} className="text-center whitespace-nowrap rounded-xl py-2 text-lg  bg-red-300/80 text-red-900 font-bold">
                         Move To Trash
                     </button>
-                    <button onClick={() => deleteNote({ noteId: noteInBlurMode._id })} className="w-full text-center whitespace-nowrap rounded-xl py-2 text-md  bg-red-500 text-white">
-                        DELETE PERMANENTLY
+                    <button onClick={() => deleteNote({ noteId: noteInBlurMode._id })} className="text-center whitespace-nowrap rounded-xl py-2 text-md  bg-red-800/90 text-red-300 font-bold">
+                        DELETE
                     </button>
-                    <button onClick={closePopup} className="w-full text-center whitespace-nowrap rounded-xl py-2 text-md  bg-gray-300 text-gray-900">
+                    <button onClick={closePopup} className="text-center whitespace-nowrap rounded-xl py-2 text-md font-bold bg-gray-600 text-gray-300">
                         Cancel
                     </button>
                 </div>
-            </div>
+            </motion.div>
         </BackdropWrapper>
     );
 }

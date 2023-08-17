@@ -21,3 +21,7 @@
 .notes-gap {
     gap: 0.75rem;
 }
+
+body {
+    overscroll-behavior: contain;
+}
