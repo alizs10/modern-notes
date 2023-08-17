@@ -79,11 +79,11 @@ function Header() {
 
                 {listMode === 0 ? (
                     <button onClick={toggleBetweenModes} className="text-white scale-110 transition-all duration-300 hover:bg-gray-700 rounded-full p-[0.4rem]">
-                        <RectangleGroupIcon />
+                        <QueueListIcon />
                     </button>
                 ) : (
                     <button onClick={toggleBetweenModes} className="text-white scale-110 transition-all duration-300 hover:bg-gray-700 rounded-full p-[0.4rem]">
-                        <QueueListIcon />
+                        <RectangleGroupIcon />
                     </button>
                 )}
 

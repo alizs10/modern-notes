@@ -34,7 +34,7 @@ function TrashedNotes() {
 
             {trashedNotes.length === 0 && (<EmptyTrash />)}
 
-            <div className={`grid grid-cols-${listMode === 0 ? '2' : '1'} gap-3`}>
+            <div className={`grid ${listMode === 0 ? 'grid-cols-2' : 'grid-cols-1'} gap-3`}>
                 {trashedNotes.map(note => <Note key={note._id} note={note} />)}
             </div>
         </div>
