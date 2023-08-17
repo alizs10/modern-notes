@@ -25,7 +25,7 @@ const useAppStore = create((set) => ({
         newNoteObj.updatedAt = d;
         newNoteObj.deletedAt = null;
 
-        return { notes: [newNoteObj, ...state.notes] }
+        return { notes: [newNoteObj, ...state.notes], showTrash: false }
     }),
 
     updateNote: (payload) => set((state) => {
