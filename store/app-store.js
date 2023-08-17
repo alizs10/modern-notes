@@ -59,7 +59,7 @@ const useAppStore = create((set) => ({
         let updatableNoteIndex = notesIns.findIndex(n => n._id === noteId)
         notesIns[updatableNoteIndex] = { ...notesIns[updatableNoteIndex], deletedAt }
 
-        return { notes: notesIns, noteInBlurMode: null, deleteNotePopupVis: false }
+        return { notes: notesIns, deleteNotePopupVis: false }
     }),
 
     unTrashNote: (payload) => set((state) => {
@@ -69,7 +69,7 @@ const useAppStore = create((set) => ({
         let updatableNoteIndex = notesIns.findIndex(n => n._id === noteId)
         notesIns[updatableNoteIndex] = { ...notesIns[updatableNoteIndex], deletedAt: null }
 
-        return { notes: notesIns }
+        return { notes: notesIns, deleteNotePopupVis: false }
     }),
 
     pinNote: (payload) => set((state) => {

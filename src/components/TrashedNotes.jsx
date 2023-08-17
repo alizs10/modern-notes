@@ -24,6 +24,7 @@ function TrashedNotes() {
 
     if (!showTrash) return
 
+    console.log(trashedNotes);
 
     return (
         <div className="relative px-3 flex flex-col gap-y-4">

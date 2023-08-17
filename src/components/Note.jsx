@@ -7,6 +7,7 @@ import useAppStore from "../../store/app-store";
 import { motion } from 'framer-motion'
 import UnPinIcon from "./Common/Icons/UnPinIcon";
 import { config } from "../../libs/swipeable";
+import RestoreIcon from "./Common/Icons/RestoreIcon";
 
 function Note({ note }) {
 
@@ -27,9 +28,7 @@ function Note({ note }) {
     }
     function handleSwipeLeft() {
 
-        if (note._id !== noteInBlurMode?._id) {
-            setNoteInBlurMode(note)
-        }
+        setNoteInBlurMode(note)
         setLBlur('0')
 
     }
@@ -102,28 +101,39 @@ function Note({ note }) {
 
             <div style={{ left: (note._id === noteInBlurMode?._id) ? lBlur : '100%' }} className="absolute transition-all duration-300 w-full top-0 bottom-0 left-full backdrop-blur-[2px] rounded-xl flex items-end pb-4 justify-center gap-x-2">
 
-                <button onClick={() => setDeleteNotePopupVis(true)} className="p-2 aspect-square shadow-md rounded-full bg-red-50 text-red-500 text-sm">
-                    <div className="scale-90">
-                        <TrashIcon />
-                    </div>
+                <button onClick={() => setDeleteNotePopupVis(true)} className={`p-2 aspect-square shadow-md rounded-full ${note.deletedAt ? 'bg-emerald-50 fill-emerald-600' : 'bg-red-50 text-red-500'} text-sm`}>
+                    {note.deletedAt ? (
+                        <div className="scale-90">
+                            <RestoreIcon />
+                        </div>
+                    ) : (
+                        <div className="scale-90">
+                            <TrashIcon />
+                        </div>
+                    )}
                 </button>
-                <button onClick={() => {
-                    note.isPinned ? unPinNote({ noteId: note._id }) : pinNote({ noteId: note._id })
-                }} className="p-2 aspect-square shadow-md rounded-full bg-gray-200 fill-gray-600 text-sm">
-                    <div className="scale-90 relative">
-                        {note.isPinned ? (
-                            <UnPinIcon />
-                        ) : (
-                            <PinIcon />
-                        )}
-                    </div>
-                </button>
+                {!note.deletedAt && (
+                    <>
+                        <button onClick={() => {
+                            note.isPinned ? unPinNote({ noteId: note._id }) : pinNote({ noteId: note._id })
+                        }} className="p-2 aspect-square shadow-md rounded-full bg-gray-200 fill-gray-600 text-sm">
 
-                <button className="p-2 aspect-square shadow-md rounded-full bg-yellow-50 text-yellow-600 text-sm">
-                    <div className="scale-90">
-                        <EditIcon />
-                    </div>
-                </button>
+                            <div className="scale-90 relative">
+                                {note.isPinned ? (
+                                    <UnPinIcon />
+                                ) : (
+                                    <PinIcon />
+                                )}
+                            </div>
+                        </button>
+
+                        <button className="p-2 aspect-square shadow-md rounded-full bg-yellow-50 text-yellow-600 text-sm">
+                            <div className="scale-90">
+                                <EditIcon />
+                            </div>
+                        </button>
+                    </>
+                )}
             </div>
         </motion.div>
     );

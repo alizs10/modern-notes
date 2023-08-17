@@ -6,7 +6,9 @@ import { config } from "../../../libs/swipeable";
 
 function DeleteConfirmationPopup() {
 
-    const { setDeleteNotePopupVis, deleteNote, trashNote, noteInBlurMode } = useAppStore()
+    const { setDeleteNotePopupVis, deleteNote, trashNote, unTrashNote, noteInBlurMode } = useAppStore()
+
+
 
     function closePopup() {
         setDeleteNotePopupVis(false)
@@ -17,6 +19,10 @@ function DeleteConfirmationPopup() {
         ...config
     })
 
+
+    let noteId = noteInBlurMode._id;
+
+    console.log(noteInBlurMode);
     return (
         <BackdropWrapper handleClick={closePopup} >
             <motion.div
@@ -32,15 +38,29 @@ function DeleteConfirmationPopup() {
                 <h2 className="font-bold text-4xl text-white break-words uppercase leading-[1.4]">Choose an Action To Proceed</h2>
 
                 <div className="mb-auto flex flex-col gap-y-2">
-                    <button onClick={() => trashNote({ noteId: noteInBlurMode._id })} className="text-center whitespace-nowrap rounded-xl py-2 text-lg  bg-red-300/80 text-red-900 font-bold">
-                        Move To Trash
-                    </button>
-                    <button onClick={() => deleteNote({ noteId: noteInBlurMode._id })} className="text-center whitespace-nowrap rounded-xl py-2 text-md  bg-red-800/90 text-red-300 font-bold">
-                        DELETE
-                    </button>
-                    <button onClick={closePopup} className="text-center whitespace-nowrap rounded-xl py-2 text-md font-bold bg-gray-600 text-gray-300">
-                        Cancel
-                    </button>
+                    {noteInBlurMode.deletedAt ? (
+                        <>
+                            <button onClick={() => unTrashNote({ noteId })} className="text-center whitespace-nowrap rounded-xl py-2 text-lg  bg-emerald-300/80 text-emerald-900 font-bold">
+                                Restore
+                            </button>
+                            <button onClick={closePopup} className="text-center whitespace-nowrap rounded-xl py-2 text-md font-bold bg-gray-600 text-gray-300">
+                                Cancel
+                            </button>
+                        </>
+                    ) : (
+                        <>
+                            <button onClick={() => trashNote({ noteId })} className="text-center whitespace-nowrap rounded-xl py-2 text-lg  bg-red-300/80 text-red-900 font-bold">
+                                Move To Trash
+                            </button>
+                            <button onClick={() => deleteNote({ noteId })} className="text-center whitespace-nowrap rounded-xl py-2 text-md  bg-red-800/90 text-red-300 font-bold">
+                                DELETE
+                            </button>
+                            <button onClick={closePopup} className="text-center whitespace-nowrap rounded-xl py-2 text-md font-bold bg-gray-600 text-gray-300">
+                                Cancel
+                            </button>
+                        </>
+                    )}
+
                 </div>
             </motion.div>
         </BackdropWrapper>
