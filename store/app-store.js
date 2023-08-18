@@ -118,6 +118,12 @@ const useAppStore = create((set) => ({
     showAbout: false,
     setShowAbout: (payload) => set(() => ({ showAbout: payload })),
 
+    showNote: null,
+    setShowNote: (payload) => set(() => ({ showNote: payload })),
+
+    showReadingMode: false,
+    setShowReadingMode: (payload) => set(() => ({ showReadingMode: payload })),
+
     version: '1.0.0'
 }))
 

@@ -80,7 +80,6 @@ function Notes() {
     //     return newNotesArr;
     // }
 
-    console.log(notes);
 
     if (showTrash) return
 

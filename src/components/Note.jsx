@@ -11,13 +11,14 @@ import RestoreIcon from "./Common/Icons/RestoreIcon";
 
 function Note({ note }) {
 
-    const { noteInBlurMode, setNoteInBlurMode, pinNote, unPinNote, setDeleteNotePopupVis } = useAppStore()
+    const { noteInBlurMode, setNoteInBlurMode, pinNote, unPinNote, setDeleteNotePopupVis, setShowNote, setShowReadingMode } = useAppStore()
 
 
 
     const handlers = useSwipeable({
         onSwipedLeft: handleSwipeLeft,
         onSwipedRight: handleSwipeRight,
+        onTap: handleShowNote,
         ...config
     });
 
@@ -35,28 +36,6 @@ function Note({ note }) {
 
 
     const [lBlur, setLBlur] = useState('100%')
-
-
-    function noteSize(size) {
-        switch (size) {
-            case 0:
-                return 'note-size-0'
-                break;
-            case 1:
-                return 'note-size-1'
-                break;
-            case 2:
-                return 'note-size-2'
-                break;
-            case 3:
-                return 'note-size-3'
-                break;
-
-            default:
-                return 'note-size-1'
-                break;
-        }
-    }
 
     function noteColor(color) {
         switch (color) {
@@ -83,6 +62,11 @@ function Note({ note }) {
                 return 'bg-gray-900 outline outline-2 outline-gray-900 text-white'
                 break;
         }
+    }
+
+    function handleShowNote() {
+        setShowNote(note)
+        setShowReadingMode(true)
     }
 
     return (
