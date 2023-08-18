@@ -11,10 +11,11 @@ import Menu from "./components/Menu"
 import TrashedNotes from "./components/TrashedNotes"
 import About from "./components/About"
 import ReadingMode from "./components/ReadingMode"
+import EditNoteEditor from "./components/EditNoteEditor"
 
 function App() {
 
-  const { newNoteEditorVis, setNewNoteEditorVis, deleteNotePopupVis, menuVis, showAbout, showReadingMode } = useAppStore()
+  const { newNoteEditorVis, setNewNoteEditorVis, deleteNotePopupVis, menuVis, showAbout, showReadingMode, editNoteEditorVis } = useAppStore()
 
   function handleOpenNewNoteEditor() {
     setNewNoteEditorVis(true)
@@ -55,6 +56,12 @@ function App() {
       <AnimatePresence>
         {newNoteEditorVis && (
           <NewNoteEditor />
+        )}
+      </AnimatePresence>
+
+      <AnimatePresence>
+        {editNoteEditorVis && (
+          <EditNoteEditor />
         )}
       </AnimatePresence>
 

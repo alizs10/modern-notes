@@ -32,12 +32,12 @@ const useAppStore = create((set) => ({
 
         let { noteId, title, note, color, isPinned } = payload;
 
-        let updatedAt = new Date.now()
+        let updatedAt = Date.now()
         let notesIns = [...state.notes]
         let updatableNoteIndex = notesIns.findIndex(n => n._id === noteId)
         notesIns[updatableNoteIndex] = { ...notesIns[updatableNoteIndex], title, note, color, isPinned, updatedAt }
 
-        return { notes: notesIns }
+        return { notes: notesIns, noteInBlurMode: null }
     }),
 
     deleteNote: (payload) => set((state) => {
@@ -123,6 +123,13 @@ const useAppStore = create((set) => ({
 
     showReadingMode: false,
     setShowReadingMode: (payload) => set(() => ({ showReadingMode: payload })),
+
+
+    editNoteEditorVis: false,
+    setEditNoteEditorVis: (payload) => set(() => ({ editNoteEditorVis: payload })),
+
+    editableNote: null,
+    setEditableNote: (payload) => set(() => ({ editableNote: payload })),
 
     version: '1.0.0'
 }))

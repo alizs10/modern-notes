@@ -11,14 +11,18 @@ import RestoreIcon from "./Common/Icons/RestoreIcon";
 
 function Note({ note }) {
 
-    const { noteInBlurMode, setNoteInBlurMode, pinNote, unPinNote, setDeleteNotePopupVis, setShowNote, setShowReadingMode } = useAppStore()
+    const { noteInBlurMode, setNoteInBlurMode, pinNote, unPinNote, setDeleteNotePopupVis, setShowNote, setShowReadingMode, setEditableNote, setEditNoteEditorVis } = useAppStore()
 
 
 
     const handlers = useSwipeable({
         onSwipedLeft: handleSwipeLeft,
-        onSwipedRight: handleSwipeRight,
         onTap: handleShowNote,
+        ...config
+    });
+
+    const optionsHandlers = useSwipeable({
+        onSwipedRight: handleSwipeRight,
         ...config
     });
 
@@ -69,21 +73,30 @@ function Note({ note }) {
         setShowReadingMode(true)
     }
 
-    return (
-        <motion.div
-            initial={{ x: -150, opacity: 0 }}
-            animate={{ x: [-150, 0], opacity: 1 }}
-            exit={{ x: [0, -150], opacity: 0 }}
-            transition={{ duration: '0.5' }}
-            className={`${noteColor(note.color)} col-span-1 shadow-sm shadow-gray-900 relative overflow-hidden p-4 flex flex-col gap-y-2 rounded-3xl`}
-            {...handlers}
-        >
-            <h4 className="text-lg font-bold">{note.title}</h4>
-            <p className="text-sm break-words text-ellipsis">
-                {note.note}
-            </p>
+    function handleShowEditNoteEditor() {
+        setEditableNote(note)
+        setEditNoteEditorVis(true)
+    }
 
-            <div style={{ left: (note._id === noteInBlurMode?._id) ? lBlur : '100%' }} className="absolute transition-all duration-300 w-full top-0 bottom-0 left-full backdrop-blur-[2px] rounded-xl flex items-end pb-4 justify-center gap-x-2">
+    return (
+        <div className={`relative col-span-1 overflow-hidden ${noteColor(note.color)} rounded-3xl`}>
+            <motion.div
+                initial={{ x: -150, opacity: 0 }}
+                animate={{ x: [-150, 0], opacity: 1 }}
+                exit={{ x: [0, -150], opacity: 0 }}
+                transition={{ duration: '0.5' }}
+                className={`shadow-sm shadow-gray-900 p-4 flex flex-col gap-y-2`}
+                {...handlers}
+            >
+                <h4 className="text-lg font-bold">{note.title}</h4>
+                <p className="text-sm break-words text-ellipsis">
+                    {note.note}
+                </p>
+
+
+            </motion.div>
+
+            <div {...optionsHandlers} style={{ left: (note._id === noteInBlurMode?._id) ? lBlur : '100%' }} className="absolute transition-all duration-300 w-full top-0 bottom-0 left-full backdrop-blur-[2px] rounded-xl flex items-end pb-4 justify-center gap-x-2">
 
                 <button onClick={() => setDeleteNotePopupVis(true)} className={`p-2 aspect-square shadow-md rounded-full ${note.deletedAt ? 'bg-emerald-50 fill-emerald-600' : 'bg-red-50 text-red-500'} text-sm`}>
                     {note.deletedAt ? (
@@ -111,7 +124,7 @@ function Note({ note }) {
                             </div>
                         </button>
 
-                        <button className="p-2 aspect-square shadow-md rounded-full bg-yellow-50 text-yellow-600 text-sm">
+                        <button onClick={handleShowEditNoteEditor} className="p-2 aspect-square shadow-md rounded-full bg-yellow-50 text-yellow-600 text-sm">
                             <div className="scale-90">
                                 <EditIcon />
                             </div>
@@ -119,7 +132,7 @@ function Note({ note }) {
                     </>
                 )}
             </div>
-        </motion.div>
+        </div>
     );
 }
 
