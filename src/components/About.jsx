@@ -21,7 +21,7 @@ function About() {
         <BackdropWrapper handleClick={handleClose}>
             <motion.div
                 initial={{ y: '100%' }}
-                animate={{ y: ['100%', '30%'] }}
+                animate={{ y: ['100%', '25%'] }}
                 exit={{ y: '100%' }}
                 transition={{ bounce: 'none', duration: '0.3' }}
                 {...handlers}
