@@ -12,14 +12,16 @@ import TrashedNotes from "./components/TrashedNotes"
 import About from "./components/About"
 import ReadingMode from "./components/ReadingMode"
 import EditNoteEditor from "./components/EditNoteEditor"
+import Notifications from "./components/Notification/Notifications"
 
 function App() {
 
-  const { newNoteEditorVis, setNewNoteEditorVis, deleteNotePopupVis, menuVis, showAbout, showReadingMode, editNoteEditorVis } = useAppStore()
+  const { newNoteEditorVis, setNewNoteEditorVis, deleteNotePopupVis, menuVis, showAbout, showReadingMode, editNoteEditorVis, notificationVis, addNotification, removeNotification } = useAppStore()
 
   function handleOpenNewNoteEditor() {
     setNewNoteEditorVis(true)
   }
+
 
   return (
     <div className="h-screen overflow-scroll bg-gray-800">
@@ -64,6 +66,10 @@ function App() {
           <EditNoteEditor />
         )}
       </AnimatePresence>
+
+
+      <Notifications />
+
 
       <button onClick={handleOpenNewNoteEditor} className="fixed out bottom-10 right-1/2 translate-x-1/2 flex justify-center items-center rounded-3xl px-5 py-3 text-xl font-bold text-white bg-gray-700 shadow-md shadow-gray-900">
         <PlusIcon />

@@ -6,7 +6,7 @@ import CheckCircleIcon from "./Common/Icons/CheckCircleIcon";
 
 function NewNoteEditor() {
 
-    const { setNewNoteEditorVis, createNewNote } = useAppStore()
+    const { setNewNoteEditorVis, createNewNote, addNotification, removeNotification } = useAppStore()
 
     const noteEditorRef = useRef(null)
     const titleRef = useRef(null)
@@ -20,7 +20,19 @@ function NewNoteEditor() {
                 color
             })
         }
+
+
+        let newNotify = {
+            _id: Date.now(),
+            index: 0,
+            message: 'note added!',
+            status: 0
+        }
         setNewNoteEditorVis(false)
+        addNotification(newNotify)
+        setTimeout(() => {
+            removeNotification(newNotify._id)
+        }, 3000)
     }
 
     const [placeholderVis, setPlaceholderVis] = useState(true)

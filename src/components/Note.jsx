@@ -11,7 +11,7 @@ import RestoreIcon from "./Common/Icons/RestoreIcon";
 
 function Note({ note }) {
 
-    const { noteInBlurMode, setNoteInBlurMode, pinNote, unPinNote, setDeleteNotePopupVis, setShowNote, setShowReadingMode, setEditableNote, setEditNoteEditorVis } = useAppStore()
+    const { noteInBlurMode, setNoteInBlurMode, pinNote, unPinNote, setDeleteNotePopupVis, setShowNote, setShowReadingMode, setEditableNote, setEditNoteEditorVis, addNotification, removeNotification } = useAppStore()
 
 
 
@@ -78,16 +78,38 @@ function Note({ note }) {
         setEditNoteEditorVis(true)
     }
 
+    function handleTogglePinNote() {
+        if (note.isPinned) {
+            unPinNote({ noteId: note._id })
+        }
+        else {
+            pinNote({ noteId: note._id })
+        }
+
+
+
+        let newNotify = {
+            _id: Date.now(),
+            index: 0,
+            message: note.isPinned ? 'note unpinned' : 'note pinned',
+            status: 3
+        }
+        addNotification(newNotify)
+        setTimeout(() => {
+            removeNotification(newNotify._id)
+        }, 3000)
+    }
+
     return (
         <motion.div
             initial={{ x: -150, opacity: 0 }}
             animate={{ x: [-150, 0], opacity: 1 }}
             exit={{ x: [0, -150], opacity: 0 }}
             transition={{ duration: '0.5' }}
-            className={`relative col-span-1 overflow-hidden ${noteColor(note.color)} rounded-3xl`}>
+            className={`relative col-span-1 overflow-hidden shadow-sm shadow-gray-900 ${noteColor(note.color)} rounded-3xl`}>
             <div
 
-                className={`shadow-sm shadow-gray-900 p-4 flex flex-col gap-y-2`}
+                className={`p-4 flex flex-col gap-y-2`}
                 {...handlers}
             >
                 <h4 className="text-lg font-bold select-none">{note.title}</h4>
@@ -113,9 +135,7 @@ function Note({ note }) {
                 </button>
                 {!note.deletedAt && (
                     <>
-                        <button onClick={() => {
-                            note.isPinned ? unPinNote({ noteId: note._id }) : pinNote({ noteId: note._id })
-                        }} className="p-2 aspect-square shadow-md rounded-full bg-gray-200 fill-gray-600 text-sm">
+                        <button onClick={handleTogglePinNote} className="p-2 aspect-square shadow-md rounded-full bg-gray-200 fill-gray-600 text-sm">
 
                             <div className="scale-90 relative">
                                 {note.isPinned ? (
