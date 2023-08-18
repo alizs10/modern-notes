@@ -29,10 +29,10 @@ function ReadingMode() {
             className="z-40 h-screen w-screen overflow-scroll absolute inset-0 bg-gray-900 flex flex-col gap-y-2"
             {...handlers}
         >
-            <div className="p-5 text-white text-xl font-bold">Reading Mode</div>
+            <div className="p-5 text-white select-none text-xl font-bold">Reading Mode</div>
             <div className="px-5 flex flex-col gap-y-4">
-                <h3 className="text-gray-500 font-bold text-5xl">{showNote.title.length > 0 ? showNote.title : 'No Title'}</h3>
-                <p className="text-xl text-gray-300 leading-[1.4] pb-24">
+                <h3 className="text-gray-500 font-bold select-none text-5xl">{showNote.title.length > 0 ? showNote.title : 'No Title'}</h3>
+                <p className="text-xl text-gray-300 break-words select-none leading-[1.4] pb-24">
                     {showNote.note}
                 </p>
             </div>

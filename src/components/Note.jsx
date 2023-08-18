@@ -90,9 +90,9 @@ function Note({ note }) {
                 className={`shadow-sm shadow-gray-900 p-4 flex flex-col gap-y-2`}
                 {...handlers}
             >
-                <h4 className="text-lg font-bold">{note.title}</h4>
-                <p className="text-sm break-words text-ellipsis">
-                    {note.note}
+                <h4 className="text-lg font-bold select-none">{note.title}</h4>
+                <p className="text-sm break-words touch-none select-none text-ellipsis">
+                    {note.note.length > 150 ? note.note.substr(0, 150) + '...' : note.note}
                 </p>
 
 
