@@ -49,7 +49,7 @@ function Header() {
 
         handleSearch()
 
-    }, [searchStr, showTrash])
+    }, [searchStr, showTrash, notes])
 
     return (
         <div className="flex flex-col gap-y-5 p-3">
@@ -64,9 +64,11 @@ function Header() {
                     </button>
                 </div>
                 {searchStr.length > 0 && (
-                    <button onClick={clearSearchInp} className="bg-gray-900 absolute right-2 z-20 top-2 flex justify-center items-center bottom-2 aspect-square text-white scale-110 transition-all duration-300 hover:bg-gray-800 rounded-full p-1">
-                        <XIcon />
-                    </button>
+                    <div className="absolute right-0 top-0 bottom-0 z-20 flex justify-center items-center p-3">
+                        <button onClick={clearSearchInp} className="bg-gray-900 flex justify-center items-center bottom-2 aspect-square text-white scale-110 transition-all duration-300 hover:bg-gray-800 rounded-full p-1">
+                            <XIcon />
+                        </button>
+                    </div>
                 )}
                 <input type="text" value={searchStr} onChange={e => setSearchStr(e.target.value)}
                     className="absolute inset-0 outline-none z-0 text-center bg-gray-900 text-xl placeholder:text-lg rounded-full h-full w-full px-14 text-white" placeholder="Search your notes" />

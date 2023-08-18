@@ -80,7 +80,7 @@ function Notes() {
     //     return newNotesArr;
     // }
 
-    console.log(noteInBlurMode);
+    console.log(notes);
 
     if (showTrash) return
 
