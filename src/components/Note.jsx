@@ -79,12 +79,14 @@ function Note({ note }) {
     }
 
     return (
-        <div className={`relative col-span-1 overflow-hidden ${noteColor(note.color)} rounded-3xl`}>
-            <motion.div
-                initial={{ x: -150, opacity: 0 }}
-                animate={{ x: [-150, 0], opacity: 1 }}
-                exit={{ x: [0, -150], opacity: 0 }}
-                transition={{ duration: '0.5' }}
+        <motion.div
+            initial={{ x: -150, opacity: 0 }}
+            animate={{ x: [-150, 0], opacity: 1 }}
+            exit={{ x: [0, -150], opacity: 0 }}
+            transition={{ duration: '0.5' }}
+            className={`relative col-span-1 overflow-hidden ${noteColor(note.color)} rounded-3xl`}>
+            <div
+
                 className={`shadow-sm shadow-gray-900 p-4 flex flex-col gap-y-2`}
                 {...handlers}
             >
@@ -94,7 +96,7 @@ function Note({ note }) {
                 </p>
 
 
-            </motion.div>
+            </div>
 
             <div {...optionsHandlers} style={{ left: (note._id === noteInBlurMode?._id) ? lBlur : '100%' }} className="absolute transition-all duration-300 w-full top-0 bottom-0 left-full backdrop-blur-[2px] rounded-xl flex items-end pb-4 justify-center gap-x-2">
 
@@ -132,7 +134,7 @@ function Note({ note }) {
                     </>
                 )}
             </div>
-        </div>
+        </motion.div>
     );
 }
 
