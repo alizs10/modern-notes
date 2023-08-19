@@ -25,3 +25,7 @@
 body {
     overscroll-behavior: contain;
 }
+
+body {
+    @apply bg-gray-800
+}

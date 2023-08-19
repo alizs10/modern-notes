@@ -60,7 +60,7 @@ function Notification({ notification }) {
             animate={{ y: h }}
             exit={{ opacity: [1, 0], scale: [1, 0] }}
             transition={{ duration: '.3', delay: '0.1' }}
-            className={`${notificationStatus(notification.status, 0)} select-none fixed overflow-hidden whitespace-nowrap flex items-center top-5 z-20 text-white text-md font-bold rounded-full shadow-lg shadow-gray-900`}>
+            className={`${notificationStatus(notification.status, 0)} select-none fixed overflow-hidden whitespace-nowrap flex items-center top-5 z-30 text-white text-md font-bold rounded-full shadow-lg shadow-gray-900`}>
             <span className={`py-2 pl-3 pr-2 ${notificationStatus(notification.status, 1)}`}>
                 <InfoIcon />
             </span>

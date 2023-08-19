@@ -12,27 +12,37 @@ function NewNoteEditor() {
     const titleRef = useRef(null)
 
     function saveNewNote() {
-        console.log(noteEditorRef.current.textContent);
         if (noteEditorRef?.current?.textContent.length > 0) {
             createNewNote({
                 title: titleRef.current.value,
                 note: noteEditorRef.current.textContent,
                 color
             })
-        }
 
+            let newNotify = {
+                _id: Date.now(),
+                index: 0,
+                message: 'note added!',
+                status: 0
+            }
+            setNewNoteEditorVis(false)
+            addNotification(newNotify)
+            setTimeout(() => {
+                removeNotification(newNotify._id)
+            }, 3000)
+        } else {
 
-        let newNotify = {
-            _id: Date.now(),
-            index: 0,
-            message: 'note added!',
-            status: 0
+            let newNotify = {
+                _id: Date.now(),
+                index: 0,
+                message: "note's empty!",
+                status: 2
+            }
+            addNotification(newNotify)
+            setTimeout(() => {
+                removeNotification(newNotify._id)
+            }, 3000)
         }
-        setNewNoteEditorVis(false)
-        addNotification(newNotify)
-        setTimeout(() => {
-            removeNotification(newNotify._id)
-        }, 3000)
     }
 
     const [placeholderVis, setPlaceholderVis] = useState(true)

@@ -24,7 +24,7 @@ function App() {
 
 
   return (
-    <div className="h-screen overflow-scroll bg-gray-800">
+    <div className="h-screen max-w-[600px] mx-auto overflow-scroll bg-gray-800">
       <Header />
       <TrashedNotes />
       <PinnedNotes />

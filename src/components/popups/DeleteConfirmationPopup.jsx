@@ -6,7 +6,7 @@ import { config } from "../../../libs/swipeable";
 
 function DeleteConfirmationPopup() {
 
-    const { setDeleteNotePopupVis, deleteNote, trashNote, unTrashNote, noteInBlurMode, setNotification, setNotificationVis } = useAppStore()
+    const { setDeleteNotePopupVis, deleteNote, trashNote, unTrashNote, noteInBlurMode, addNotification, removeNotification } = useAppStore()
 
 
 
@@ -25,39 +25,54 @@ function DeleteConfirmationPopup() {
 
     function handleTrashNote() {
         trashNote({ noteId })
-        setNotification({ message: 'note moved to trash!', status: 1 })
-        setNotificationVis(true)
+        let newNotify = {
+            _id: Date.now(),
+            index: 0,
+            message: 'note moved to trash!',
+            status: 1
+        }
+        addNotification(newNotify)
         setTimeout(() => {
-            setNotificationVis(false)
+            removeNotification(newNotify._id)
         }, 3000)
     }
     function handleUnTrashNote() {
         unTrashNote({ noteId })
-        setNotification({ message: 'note restored!', status: 0 })
-        setNotificationVis(true)
+        let newNotify = {
+            _id: Date.now(),
+            index: 0,
+            message: 'note restored!',
+            status: 0
+        }
+        addNotification(newNotify)
         setTimeout(() => {
-            setNotificationVis(false)
+            removeNotification(newNotify._id)
         }, 3000)
     }
     function handleDeleteNote() {
         deleteNote({ noteId })
-        setNotification({ message: 'note deleted permanently!', status: 1 })
-        setNotificationVis(true)
+        let newNotify = {
+            _id: Date.now(),
+            index: 0,
+            message: 'note deleted permanently!',
+            status: 1
+        }
+        addNotification(newNotify)
         setTimeout(() => {
-            setNotificationVis(false)
+            removeNotification(newNotify._id)
         }, 3000)
     }
 
     return (
         <BackdropWrapper handleClick={closePopup} >
             <motion.div
-                initial={{ y: '100%' }}
-                animate={{ y: ['100%', '30%'] }}
+                initial={{ y: '100%', x: '-50%' }}
+                animate={{ y: ['100%', '0%'], x: '-50%' }}
                 exit={{ y: '100%' }}
                 transition={{ bounce: 'none', duration: '0.3' }}
                 {...handlers}
                 onClick={e => e.stopPropagation()}
-                className="fixed inset-0 bg-gray-900 p-10 rounded-t-[50px] flex flex-col gap-y-10 justify-center">
+                className="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-[600px] bg-gray-900 p-10 rounded-t-[50px] flex flex-col gap-y-10 justify-center">
                 <div className="w-24 h-1 bg-gray-500 rounded-full absolute top-2 left-1/2 -translate-x-1/2"></div>
 
                 <h2 className="font-bold text-4xl text-white break-words uppercase leading-[1.4]">Choose an Action To Proceed</h2>
@@ -67,6 +82,9 @@ function DeleteConfirmationPopup() {
                         <>
                             <button onClick={handleUnTrashNote} className="text-center whitespace-nowrap rounded-xl py-2 text-lg  bg-emerald-300/80 text-emerald-900 font-bold">
                                 Restore
+                            </button>
+                            <button onClick={handleDeleteNote} className="text-center whitespace-nowrap rounded-xl py-2 text-md  bg-red-800/90 text-red-300 font-bold">
+                                DELETE
                             </button>
                             <button onClick={closePopup} className="text-center whitespace-nowrap rounded-xl py-2 text-md font-bold bg-gray-600 text-gray-300">
                                 Cancel

@@ -47,7 +47,7 @@ const useAppStore = create((set) => ({
         let notesIns = [...state.notes]
         let filteredNotes = notesIns.filter(n => n._id !== noteId)
 
-        return { notes: filteredNotes, noteInBlurMode: null, deleteNotePopupVis: false }
+        return { notes: filteredNotes, deleteNotePopupVis: false }
     }),
 
     trashNote: (payload) => set((state) => {

@@ -7,7 +7,7 @@ import useAppStore from "../../store/app-store";
 import { motion } from 'framer-motion'
 import UnPinIcon from "./Common/Icons/UnPinIcon";
 import { config } from "../../libs/swipeable";
-import RestoreIcon from "./Common/Icons/RestoreIcon";
+import OptionsIcon from "./Common/Icons/OptionsIcon";
 
 function Note({ note }) {
 
@@ -112,7 +112,8 @@ function Note({ note }) {
                 className={`p-4 flex flex-col gap-y-2`}
                 {...handlers}
             >
-                <h4 className="text-lg font-bold select-none">{note.title}</h4>
+                <h4 className={`text-lg font-bold select-none ${note.title.length === 0 ? 'opacity-30' : ''}`}>{note.title.length === 0 ? 'No Title' : note.title}</h4>
+
                 <p className="text-sm break-words touch-none select-none text-ellipsis">
                     {note.note.length > 150 ? note.note.substr(0, 150) + '...' : note.note}
                 </p>
@@ -122,20 +123,27 @@ function Note({ note }) {
 
             <div {...optionsHandlers} style={{ left: (note._id === noteInBlurMode?._id) ? lBlur : '100%' }} className="absolute transition-all duration-300 w-full top-0 bottom-0 left-full backdrop-blur-[2px] rounded-xl flex items-end pb-4 justify-center gap-x-2">
 
-                <button onClick={() => setDeleteNotePopupVis(true)} className={`p-2 aspect-square shadow-md rounded-full ${note.deletedAt ? 'bg-emerald-50 fill-emerald-600' : 'bg-red-50 text-red-500'} text-sm`}>
-                    {note.deletedAt ? (
+                {note.deletedAt && (
+
+                    <button onClick={() => setDeleteNotePopupVis(true)} className={`p-2 aspect-square shadow-md rounded-full bg-gray-100 text-gray-600 text-sm`}>
                         <div className="scale-90">
-                            <RestoreIcon />
+                            <OptionsIcon />
                         </div>
-                    ) : (
-                        <div className="scale-90">
-                            <TrashIcon />
-                        </div>
-                    )}
-                </button>
+                    </button>
+                )}
+
                 {!note.deletedAt && (
                     <>
+
+
+                        <button onClick={() => setDeleteNotePopupVis(true)} className={`p-2 aspect-square shadow-md rounded-full bg-red-50 text-red-500 text-sm`}>
+                            <div className="scale-90">
+                                <TrashIcon />
+                            </div>
+                        </button>
+
                         <button onClick={handleTogglePinNote} className="p-2 aspect-square shadow-md rounded-full bg-gray-200 fill-gray-600 text-sm">
+
 
                             <div className="scale-90 relative">
                                 {note.isPinned ? (
@@ -151,6 +159,7 @@ function Note({ note }) {
                                 <EditIcon />
                             </div>
                         </button>
+
                     </>
                 )}
             </div>
