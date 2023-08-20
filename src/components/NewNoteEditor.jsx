@@ -12,6 +12,7 @@ function NewNoteEditor() {
     const titleRef = useRef(null)
 
     function saveNewNote() {
+        console.log(noteEditorRef?.current);
         if (noteEditorRef?.current?.textContent.length > 0) {
             createNewNote({
                 title: titleRef.current.value,

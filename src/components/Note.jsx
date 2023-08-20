@@ -109,7 +109,7 @@ function Note({ note }) {
             className={`relative col-span-1 overflow-hidden shadow-sm shadow-gray-900 ${noteColor(note.color)} rounded-3xl`}>
             <div
 
-                className={`p-4 flex flex-col gap-y-2`}
+                className={`p-4 flex flex-col gap-y-2 h-full`}
                 {...handlers}
             >
                 <h4 className={`text-lg font-bold select-none ${note.title.length === 0 ? 'opacity-30' : ''}`}>{note.title.length === 0 ? 'No Title' : note.title}</h4>
