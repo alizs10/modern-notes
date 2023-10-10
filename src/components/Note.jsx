@@ -44,10 +44,10 @@ function Note({ note }) {
     function noteColor(color) {
         switch (color) {
             case 0:
-                return 'bg-gray-900 outline outline-2 outline-gray-900 text-white'
+                return 'dark:bg-gray-900 bg-gray-100 outline outline-2 dark:outline-gray-900 outline-gray-100 dark:text-white text-black'
                 break;
             case 1:
-                return 'bg-emerald-400 outline outline-2 outline-emerald-500'
+                return 'bg-emerald-400 text-gray-800 outline outline-2 outline-emerald-500'
                 break;
             case 2:
                 return 'bg-purple-400 outline outline-2 outline-purple-500'

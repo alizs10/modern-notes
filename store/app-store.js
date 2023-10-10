@@ -109,9 +109,6 @@ const useAppStore = create((set) => ({
     newNoteEditorVis: false,
     setNewNoteEditorVis: (payload) => set(() => ({ newNoteEditorVis: payload })),
 
-    lightTheme: false,
-    setLightTheme: (payload) => set(() => ({ lightTheme: payload })),
-
     showTrash: false,
     setShowTrash: (payload) => set(() => ({ showTrash: payload })),
 

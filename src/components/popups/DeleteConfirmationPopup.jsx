@@ -72,10 +72,10 @@ function DeleteConfirmationPopup() {
                 transition={{ bounce: 'none', duration: '0.3' }}
                 {...handlers}
                 onClick={e => e.stopPropagation()}
-                className="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-[600px] bg-gray-900 p-10 rounded-t-[50px] flex flex-col gap-y-10 justify-center">
-                <div className="w-24 h-1 bg-gray-500 rounded-full absolute top-2 left-1/2 -translate-x-1/2"></div>
+                className="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-[600px] dark:bg-gray-900 bg-gray-100 p-10 rounded-t-[50px] flex flex-col gap-y-10 justify-center">
+                <div className="w-24 h-1 dark:bg-gray-500 bg-gray-300 rounded-full absolute top-2 left-1/2 -translate-x-1/2"></div>
 
-                <h2 className="font-bold text-4xl text-white break-words uppercase leading-[1.4]">Choose an Action To Proceed</h2>
+                <h2 className="font-bold text-4xl dark:text-white text-gray-800 break-words uppercase leading-[1.4]">Choose an Action To Proceed</h2>
 
                 <div className="mb-auto flex flex-col gap-y-2">
                     {noteInBlurMode.deletedAt ? (
@@ -98,7 +98,7 @@ function DeleteConfirmationPopup() {
                             <button onClick={handleDeleteNote} className="text-center whitespace-nowrap rounded-xl py-2 text-md  bg-red-800/90 text-red-300 font-bold">
                                 DELETE
                             </button>
-                            <button onClick={closePopup} className="text-center whitespace-nowrap rounded-xl py-2 text-md font-bold bg-gray-600 text-gray-300">
+                            <button onClick={closePopup} className="text-center whitespace-nowrap rounded-xl py-2 text-md font-bold dark:bg-gray-600 bg-gray-300 dark:text-gray-300 text-gray-500">
                                 Cancel
                             </button>
                         </>

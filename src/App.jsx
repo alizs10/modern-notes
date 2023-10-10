@@ -24,7 +24,7 @@ function App() {
 
 
   return (
-    <div className="h-screen max-w-[600px] mx-auto overflow-y-scroll bg-gray-800">
+    <div className="h-screen max-w-[600px] mx-auto overflow-y-scroll dark:bg-gray-800 bg-gray-200">
       <Header />
       <TrashedNotes />
       <PinnedNotes />
@@ -71,7 +71,7 @@ function App() {
       <Notifications />
 
 
-      <button onClick={handleOpenNewNoteEditor} className="fixed out bottom-10 right-1/2 translate-x-1/2 flex justify-center items-center rounded-3xl px-5 py-3 text-xl font-bold text-white bg-gray-700 shadow-md shadow-gray-900">
+      <button onClick={handleOpenNewNoteEditor} className="fixed out bottom-10 right-1/2 translate-x-1/2 flex justify-center items-center rounded-3xl px-5 py-3 text-xl font-bold dark:text-white text-black dark:bg-gray-700 bg-gray-300 shadow-md dark:shadow-gray-900 shadow-gray-300">
         <PlusIcon />
       </button>
     </div>

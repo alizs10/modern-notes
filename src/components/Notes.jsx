@@ -30,8 +30,8 @@ function Notes() {
     return (
         <div className="relative p-3 flex flex-col gap-4">
 
-            <h2 className="text-md text-gray-400">Others
-                <span className="text-xs text-gray-400 ml-2">{othersNotes.length}</span>
+            <h2 className="text-md dark:text-gray-400 text-gray-600">Others
+                <span className="text-xs dark:text-gray-400 text-gray-600 ml-2">{othersNotes.length}</span>
             </h2>
 
             <div className={`grid ${listMode === 0 ? 'grid-cols-2' : 'grid-cols-1'} gap-3`}>

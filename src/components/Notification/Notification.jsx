@@ -10,20 +10,20 @@ function Notification({ notification }) {
 
             switch (status) {
                 case 0:
-                    return 'bg-emerald-700 text-white'
+                    return 'notification-style-part0-1'
                     break;
                 case 1:
-                    return 'bg-red-800 text-white'
+                    return 'notification-style-part0-2'
                     break;
                 case 2:
-                    return 'bg-yellow-600 text-white'
+                    return 'notification-style-part0-3'
                     break;
                 case 3:
-                    return 'bg-gray-700 text-white'
+                    return 'notification-style-part0-4'
                     break;
 
                 default:
-                    return 'bg-gray-700 text-white'
+                    return 'notification-style-part0-4'
                     break;
             }
         }
@@ -31,20 +31,20 @@ function Notification({ notification }) {
 
             switch (status) {
                 case 0:
-                    return 'bg-emerald-800 text-white'
+                    return 'notification-style-1'
                     break;
                 case 1:
-                    return 'bg-red-900 text-white'
+                    return 'notification-style-2'
                     break;
                 case 2:
-                    return 'bg-yellow-700 text-white'
+                    return 'notification-style-3'
                     break;
                 case 3:
-                    return 'bg-gray-800 text-white'
+                    return 'notification-style-4'
                     break;
 
                 default:
-                    return 'bg-gray-800 text-white'
+                    return 'notification-style-4'
                     break;
             }
         }
@@ -60,8 +60,8 @@ function Notification({ notification }) {
             animate={{ y: h }}
             exit={{ opacity: [1, 0], scale: [1, 0] }}
             transition={{ duration: '.3', delay: '0.1' }}
-            className={`${notificationStatus(notification.status, 0)} select-none fixed overflow-hidden whitespace-nowrap flex items-center top-5 z-30 text-white text-md font-bold rounded-full shadow-lg shadow-gray-900`}>
-            <span className={`py-2 pl-3 pr-2 ${notificationStatus(notification.status, 1)}`}>
+            className={`${notificationStatus(notification.status, 1)} select-none fixed overflow-hidden whitespace-nowrap flex items-center top-5 z-30 text-white text-md font-bold rounded-full shadow-lg dark:shadow-gray-900 shadow-gray-200`}>
+            <span className={`py-2 pl-3 pr-2 ${notificationStatus(notification.status, 0)}`}>
                 <InfoIcon />
             </span>
             <span className="py-2 pr-3 pl-2">

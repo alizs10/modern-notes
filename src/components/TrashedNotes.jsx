@@ -28,8 +28,8 @@ function TrashedNotes() {
     return (
         <div className="relative px-3 flex flex-col gap-y-4">
 
-            <h2 className="text-md text-gray-400">Trash
-                <span className="text-xs text-gray-400 ml-2">{trashedNotes.length}</span>
+            <h2 className="text-md dark:text-gray-400 text-gray-600">Trash
+                <span className="text-xs dark:text-gray-400 text-gray-600 ml-2">{trashedNotes.length}</span>
             </h2>
 
             {trashedNotes.length === 0 && (<EmptyTrash />)}
