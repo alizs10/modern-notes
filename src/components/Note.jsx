@@ -100,6 +100,7 @@ function Note({ note }) {
         }, 3000)
     }
 
+
     return (
         <motion.div
             initial={{ x: -150, opacity: 0 }}
@@ -114,8 +115,9 @@ function Note({ note }) {
             >
                 <h4 className={`text-lg font-bold select-none ${note.title.length === 0 ? 'opacity-30' : ''}`}>{note.title.length === 0 ? 'No Title' : note.title}</h4>
 
-                <p className="text-sm break-words touch-none select-none text-ellipsis">
-                    {note.note.length > 150 ? note.note.substr(0, 150) + '...' : note.note}
+                <p className="text-sm break-words select-none text-ellipsis">
+                    {/* {note.note} */}
+                    {note.note.length > 350 ? note.note.substr(0, 350) + '...' : note.note}
                 </p>
 
 

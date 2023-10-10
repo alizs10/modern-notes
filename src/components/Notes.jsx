@@ -1,5 +1,6 @@
 import useAppStore from "../../store/app-store";
 import Note from "./Note";
+import Masonry from 'react-masonry-css';
 
 function EmptyNotes() {
     return (
@@ -24,7 +25,6 @@ function Notes() {
         return <EmptyNotes />
     }
 
-
     if (showTrash) return
 
     return (
@@ -34,13 +34,19 @@ function Notes() {
                 <span className="text-xs dark:text-gray-400 text-gray-600 ml-2">{othersNotes.length}</span>
             </h2>
 
-            <div className={`grid ${listMode === 0 ? 'grid-cols-2' : 'grid-cols-1'} gap-3`}>
+            {/* <div className={`grid ${listMode === 0 ? 'grid-cols-2' : 'grid-cols-1'} gap-3`}> */}
 
+            <Masonry
+                breakpointCols={listMode === 0 ? 1 : 2}
+                className="my-masonry-grid"
+                columnClassName="my-masonry-grid_column">
                 {othersNotes.map((note) => {
                     return <Note key={note._id} note={note} />
                 })}
 
-            </div>
+            </Masonry>
+
+            {/* </div> */}
 
 
         </div>

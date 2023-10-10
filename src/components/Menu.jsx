@@ -23,7 +23,6 @@ function Menu() {
     }
 
     function toggleLightMode() {
-        console.log(colorTheme);
         setTheme(colorTheme);
         setLightTheme(!lightTheme);
     }
