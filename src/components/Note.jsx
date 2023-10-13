@@ -1,19 +1,18 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useSwipeable } from "react-swipeable";
-import EditIcon from "./Common/Icons/EditIcon";
-import TrashIcon from "./Common/Icons/TrashIcon";
-import PinIcon from "./Common/Icons/PinIcon";
 import useAppStore from "../../store/app-store";
-import { motion } from 'framer-motion'
-import UnPinIcon from "./Common/Icons/UnPinIcon";
 import { config } from "../../libs/swipeable";
-import OptionsIcon from "./Common/Icons/OptionsIcon";
+import NoteOptions from "./NoteOptions";
+import { useNotificationsStore } from "../../store/notifications-store";
+import useNotesStore from "../../store/notes-store";
 
 function Note({ note }) {
 
-    const { noteInBlurMode, setNoteInBlurMode, pinNote, unPinNote, setDeleteNotePopupVis, setShowNote, setShowReadingMode, setEditableNote, setEditNoteEditorVis, addNotification, removeNotification } = useAppStore()
+    const { setShowNote, setShowReadingMode, setDeleteNotePopupVis, pinNote, unPinNote, setEditableNote, setEditNoteEditorVis } = useAppStore()
+    const { addNotification, removeNotification } = useNotificationsStore()
 
-
+    const { noteInBlurMode, setNoteInBlurMode } = useNotesStore()
+    const [left, setLeft] = useState(noteInBlurMode && noteInBlurMode._id === note._id ? '0' : '100%')
 
     const handlers = useSwipeable({
         onSwipedLeft: handleSwipeLeft,
@@ -21,25 +20,14 @@ function Note({ note }) {
         ...config
     });
 
-    const optionsHandlers = useSwipeable({
-        onSwipedRight: handleSwipeRight,
-        ...config
-    });
+    useEffect(() => {
 
-    function handleSwipeRight() {
-
-        setLBlur('100%')
-
-    }
-    function handleSwipeLeft() {
-
-        setNoteInBlurMode(note)
-        setLBlur('0')
-
-    }
+        if (noteInBlurMode && noteInBlurMode._id !== note._id) {
+            setLeft('100%')
+        }
 
 
-    const [lBlur, setLBlur] = useState('100%')
+    }, [noteInBlurMode])
 
     function noteColor(color) {
         switch (color) {
@@ -73,6 +61,26 @@ function Note({ note }) {
         setShowReadingMode(true)
     }
 
+
+    const optionsHandlers = useSwipeable({
+        onSwipedRight: handleSwipeRight,
+        ...config
+    });
+
+    function handleSwipeLeft() {
+
+        console.log("swiping left");
+        setLeft('0')
+        setNoteInBlurMode(note)
+    }
+
+
+    function handleSwipeRight() {
+        console.log("swiping right");
+        setLeft('100%')
+        setNoteInBlurMode(null)
+    }
+
     function handleShowEditNoteEditor() {
         setEditableNote(note)
         setEditNoteEditorVis(true)
@@ -94,6 +102,7 @@ function Note({ note }) {
             message: note.isPinned ? 'note unpinned' : 'note pinned',
             status: 3
         }
+
         addNotification(newNotify)
         setTimeout(() => {
             removeNotification(newNotify._id)
@@ -101,13 +110,9 @@ function Note({ note }) {
     }
 
 
+
     return (
-        <motion.div
-            initial={{ x: -150, opacity: 0 }}
-            animate={{ x: [-150, 0], opacity: 1 }}
-            exit={{ x: [0, -150], opacity: 0 }}
-            transition={{ duration: '0.5' }}
-            className={`relative col-span-1 overflow-hidden shadow-sm shadow-gray-900 ${noteColor(note.color)} rounded-3xl`}>
+        <div className={`relative w-1/2 shadow-sm overflow-hidden shadow-gray-900 ${noteColor(note.color)} rounded-3xl`}>
             <div
 
                 className={`p-4 flex flex-col gap-y-2 h-full`}
@@ -123,49 +128,10 @@ function Note({ note }) {
 
             </div>
 
-            <div {...optionsHandlers} style={{ left: (note._id === noteInBlurMode?._id) ? lBlur : '100%' }} className="absolute transition-all duration-300 w-full top-0 bottom-0 left-full backdrop-blur-[2px] rounded-xl flex items-end pb-4 justify-center gap-x-2">
 
-                {note.deletedAt && (
+            <NoteOptions note={note} left={left} noteInBlurMode={noteInBlurMode} optionsHandlers={optionsHandlers} setDeleteNotePopupVis={setDeleteNotePopupVis} handleTogglePinNote={handleTogglePinNote} handleShowEditNoteEditor={handleShowEditNoteEditor} />
 
-                    <button onClick={() => setDeleteNotePopupVis(true)} className={`p-2 aspect-square shadow-md rounded-full bg-gray-100 text-gray-600 text-sm`}>
-                        <div className="scale-90">
-                            <OptionsIcon />
-                        </div>
-                    </button>
-                )}
-
-                {!note.deletedAt && (
-                    <>
-
-
-                        <button onClick={() => setDeleteNotePopupVis(true)} className={`p-2 aspect-square shadow-md rounded-full bg-red-50 text-red-500 text-sm`}>
-                            <div className="scale-90">
-                                <TrashIcon />
-                            </div>
-                        </button>
-
-                        <button onClick={handleTogglePinNote} className="p-2 aspect-square shadow-md rounded-full bg-gray-200 fill-gray-600 text-sm">
-
-
-                            <div className="scale-90 relative">
-                                {note.isPinned ? (
-                                    <UnPinIcon />
-                                ) : (
-                                    <PinIcon />
-                                )}
-                            </div>
-                        </button>
-
-                        <button onClick={handleShowEditNoteEditor} className="p-2 aspect-square shadow-md rounded-full bg-yellow-50 text-yellow-600 text-sm">
-                            <div className="scale-90">
-                                <EditIcon />
-                            </div>
-                        </button>
-
-                    </>
-                )}
-            </div>
-        </motion.div>
+        </div>
     );
 }
 

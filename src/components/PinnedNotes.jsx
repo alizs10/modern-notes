@@ -1,10 +1,12 @@
 import useAppStore from "../../store/app-store";
+import useSearchStore from "../../store/search-store";
 import Note from "./Note";
 
 
 function PinnedNotes() {
 
-    const { notes, showSearchRes, searchRes, listMode, showTrash } = useAppStore()
+    const { notes, listMode, showTrash } = useAppStore()
+    const { showSearchRes, searchRes } = useSearchStore()
 
     let pinnedNotes = showSearchRes ? searchRes.filter(note => (note.isPinned && !note.deletedAt)) : notes.filter(note => (note.isPinned && !note.deletedAt))
 

@@ -1,4 +1,5 @@
 import useAppStore from "../../store/app-store";
+import useSearchStore from "../../store/search-store";
 import Note from "./Note";
 
 function EmptyTrash() {
@@ -17,7 +18,8 @@ function EmptyTrash() {
 
 function TrashedNotes() {
 
-    const { notes, showSearchRes, searchRes, listMode, showTrash } = useAppStore()
+    const { notes, listMode, showTrash } = useAppStore()
+    const { showSearchRes, searchRes, } = useSearchStore()
 
     let trashedNotes = showSearchRes ? searchRes.filter(note => note.deletedAt) : notes.filter(note => note.deletedAt)
 

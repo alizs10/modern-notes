@@ -3,10 +3,12 @@ import ChevronLeftIcon from "./Common/Icons/ChevronLeftIcon";
 import { motion } from 'framer-motion'
 import useAppStore from "../../store/app-store";
 import CheckCircleIcon from "./Common/Icons/CheckCircleIcon";
+import { useNotificationsStore } from "../../store/notifications-store";
 
 function NewNoteEditor() {
 
-    const { setNewNoteEditorVis, createNewNote, addNotification, removeNotification } = useAppStore()
+    const { setNewNoteEditorVis, createNewNote } = useAppStore()
+    const { addNotification, removeNotification } = useNotificationsStore()
 
     const noteEditorRef = useRef(null)
     const titleRef = useRef(null)

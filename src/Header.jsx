@@ -4,10 +4,12 @@ import XIcon from "./components/Common/Icons/XIcon";
 import RectangleGroupIcon from "./components/Common/Icons/RectangleGroupIcon";
 import QueueListIcon from "./components/Common/Icons/QueueListIcon";
 import useAppStore from "../store/app-store";
+import useSearchStore from "../store/search-store";
 
 function Header() {
 
-    const { listMode, setListMode, notes, setSearchRes, showSearchRes, setShowSearchRes, setMenuVis, showTrash } = useAppStore()
+    const { listMode, setListMode, notes, setMenuVis, showTrash } = useAppStore()
+    const { setSearchRes, showSearchRes, setShowSearchRes, } = useSearchStore()
 
     function toggleBetweenModes() {
         setListMode(listMode === 0 ? 1 : 0)
