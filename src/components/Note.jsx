@@ -4,15 +4,16 @@ import useAppStore from "../../store/app-store";
 import { config } from "../../libs/swipeable";
 import NoteOptions from "./NoteOptions";
 import { useNotificationsStore } from "../../store/notifications-store";
-import useNotesStore from "../../store/notes-store";
+import useClickOutside from "../../hooks/useClickOutside";
 
 function Note({ note }) {
 
-    const { setShowNote, setShowReadingMode, setDeleteNotePopupVis, pinNote, unPinNote, setEditableNote, setEditNoteEditorVis } = useAppStore()
+    const { setShowNote, setShowReadingMode, setDeleteNotePopupVis, pinNote, unPinNote, setEditableNote, setEditNoteEditorVis, noteInBlurMode, setNoteInBlurMode } = useAppStore()
+
     const { addNotification, removeNotification } = useNotificationsStore()
 
-    const { noteInBlurMode, setNoteInBlurMode } = useNotesStore()
-    const [left, setLeft] = useState(noteInBlurMode && noteInBlurMode._id === note._id ? '0' : '100%')
+    // const [left, setLeft] = useState(noteInBlurMode && noteInBlurMode._id === note._id ? '0' : '100%')
+    const [left, setLeft] = useState('100%')
 
     const handlers = useSwipeable({
         onSwipedLeft: handleSwipeLeft,
@@ -25,7 +26,6 @@ function Note({ note }) {
         if (noteInBlurMode && noteInBlurMode._id !== note._id) {
             setLeft('100%')
         }
-
 
     }, [noteInBlurMode])
 
@@ -68,15 +68,12 @@ function Note({ note }) {
     });
 
     function handleSwipeLeft() {
-
-        console.log("swiping left");
         setLeft('0')
         setNoteInBlurMode(note)
     }
 
 
     function handleSwipeRight() {
-        console.log("swiping right");
         setLeft('100%')
         setNoteInBlurMode(null)
     }
@@ -87,6 +84,9 @@ function Note({ note }) {
     }
 
     function handleTogglePinNote() {
+
+        setLeft('100%')
+
         if (note.isPinned) {
             unPinNote({ noteId: note._id })
         }
@@ -109,10 +109,26 @@ function Note({ note }) {
         }, 3000)
     }
 
+    const noteRef = useClickOutside(() => {
+        setLeft('100%')
+        // setNoteInBlurMode(null)
+    })
 
+    function onNoteTrash() {
+        setLeft('100%')
+        setDeleteNotePopupVis(true)
+    }
+    function onNoteTogglePin() {
+        setLeft('100%')
+        handleTogglePinNote()
+    }
+    function onNoteEdit() {
+        setLeft('100%')
+        handleShowEditNoteEditor()
+    }
 
     return (
-        <div className={`relative w-1/2 shadow-sm overflow-hidden shadow-gray-900 ${noteColor(note.color)} rounded-3xl`}>
+        <div ref={noteRef} className={`flex-1 break-inside-avoid rounded-3xl relative  overflow-hidden ${noteColor(note.color)} w-full h-fit`}>
             <div
 
                 className={`p-4 flex flex-col gap-y-2 h-full`}
@@ -121,15 +137,17 @@ function Note({ note }) {
                 <h4 className={`text-lg font-bold select-none ${note.title.length === 0 ? 'opacity-30' : ''}`}>{note.title.length === 0 ? 'No Title' : note.title}</h4>
 
                 <p className="text-sm break-words select-none text-ellipsis">
-                    {/* {note.note} */}
-                    {note.note.length > 350 ? note.note.substr(0, 350) + '...' : note.note}
+
+                    {note.note.length > 200 ? note.note.substr(0, 200) + '...' : note.note}
                 </p>
 
 
             </div>
 
 
-            <NoteOptions note={note} left={left} noteInBlurMode={noteInBlurMode} optionsHandlers={optionsHandlers} setDeleteNotePopupVis={setDeleteNotePopupVis} handleTogglePinNote={handleTogglePinNote} handleShowEditNoteEditor={handleShowEditNoteEditor} />
+            <NoteOptions note={note} left={left} noteInBlurMode={noteInBlurMode} optionsHandlers={optionsHandlers} onTrash={onNoteTrash}
+                onTogglePin={onNoteTogglePin}
+                onEdit={onNoteEdit} />
 
         </div>
     );

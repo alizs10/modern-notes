@@ -119,6 +119,9 @@ const useAppStore = create((set) => ({
     editableNote: null,
     setEditableNote: (payload) => set(() => ({ editableNote: payload })),
 
+    noteInBlurMode: null,
+    setNoteInBlurMode: (payload) => set(() => ({ noteInBlurMode: payload })),
+
     version: '1.0.0'
 }))
 

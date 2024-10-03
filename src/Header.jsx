@@ -54,31 +54,31 @@ function Header() {
     }, [searchStr, showTrash, notes])
 
     return (
-        <div className="flex flex-col gap-y-5 p-3">
+        <div className="flex flex-col p-3 gap-y-5">
 
-            <div className="relative overflow-hidden flex h-14 justify-between rounded-full p-2 dark:bg-gray-900 bg-gray-100 shadow-md dark:shadow-gray-900 shadow-gray-100">
-                <div className="absolute left-0 top-0 bottom-0 z-20 flex justify-center items-center p-3">
+            <div className="sticky top-0 flex justify-between p-2 overflow-hidden bg-gray-100 rounded-full shadow-sm h-14 dark:bg-gray-900">
+                <div className="absolute top-0 bottom-0 left-0 z-20 flex items-center justify-center p-3">
 
                     <button
                         onClick={() => setMenuVis(true)}
-                        className="dark:bg-gray-900 bg-gray-100 p-1 flex justify-center items-center bottom-2 aspect-square dark:text-white text-black scale-110 transition-all duration-300 dark:hover:bg-gray-800 hover:bg-gray-200 rounded-full">
+                        className="flex items-center justify-center p-1 text-black transition-all duration-300 scale-110 bg-gray-100 rounded-full dark:bg-gray-900 bottom-2 aspect-square dark:text-white dark:hover:bg-gray-800 hover:bg-gray-200">
                         <BarsIcon />
                     </button>
                 </div>
                 {searchStr.length > 0 && (
-                    <div className="absolute right-0 top-0 bottom-0 z-20 flex justify-center items-center p-3">
-                        <button onClick={clearSearchInp} className="dark:bg-gray-900 bg-gray-100 flex justify-center items-center bottom-2 aspect-square dark:text-white text-black scale-110 transition-all duration-300 dark:hover:bg-gray-800 hover:bg-gray-200 rounded-full p-1">
+                    <div className="absolute top-0 bottom-0 right-0 z-20 flex items-center justify-center p-3">
+                        <button onClick={clearSearchInp} className="flex items-center justify-center p-1 text-black transition-all duration-300 scale-110 bg-gray-100 rounded-full dark:bg-gray-900 bottom-2 aspect-square dark:text-white dark:hover:bg-gray-800 hover:bg-gray-200">
                             <XIcon />
                         </button>
                     </div>
                 )}
                 <input type="text" value={searchStr} onChange={e => setSearchStr(e.target.value)}
-                    className="absolute inset-0 outline-none z-0 text-center dark:bg-gray-900 bg-gray-100 text-xl placeholder:text-lg rounded-full h-full w-full px-14 dark:text-white text-black" placeholder="Search your notes" />
+                    className="absolute inset-0 z-0 w-full h-full text-xl text-center text-black bg-gray-100 rounded-full outline-none dark:bg-gray-900 placeholder:text-lg px-14 dark:text-white" placeholder="Search your notes" />
             </div>
 
             <div className="flex justify-between item-center">
-                <h2 className="text-2xl dark:text-white text-black font-bold">My Notes
-                    <span className="text-xs dark:text-gray-400 text-gray-600 ml-2">{notes.filter(note => !note.deletedAt).length}</span>
+                <h2 className="text-2xl font-bold text-black dark:text-white">My Notes
+                    <span className="ml-2 text-xs text-gray-600 dark:text-gray-400">{notes.filter(note => !note.deletedAt).length}</span>
                 </h2>
 
                 {listMode === 0 ? (

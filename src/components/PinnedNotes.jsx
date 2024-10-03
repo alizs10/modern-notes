@@ -13,13 +13,13 @@ function PinnedNotes() {
     if (pinnedNotes.length === 0 || showTrash) return
 
     return (
-        <div className="relative px-3 flex flex-col gap-y-4">
+        <div className="relative flex flex-col px-3 gap-y-4">
 
-            <h2 className="text-md dark:text-gray-400 text-gray-600">Pinned
-                <span className="text-xs dark:text-gray-400 text-gray-600 ml-2">{pinnedNotes.length}</span>
+            <h2 className="text-gray-600 text-md dark:text-gray-400">Pinned
+                <span className="ml-2 text-xs text-gray-600 dark:text-gray-400">{pinnedNotes.length}</span>
             </h2>
 
-            <div className={`grid ${listMode === 0 ? 'grid-cols-2' : 'grid-cols-1'} gap-3`}>
+            <div className={`space-y-4 ${listMode === 0 ? 'columns-2' : 'columns-1'} gap-3`}>
                 {pinnedNotes.map(note => <Note key={note._id} note={note} />)}
             </div>
         </div>
